@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TarefaMix — Organizador escolar</title>
+<style>
+:root{--ink:#17221d;--muted:#75817a;--line:#e8ece8;--green:#347a58;--mint:#e7f2eb;--bg:#f7f9f7;--amber:#f8edcf;--rose:#fae6e2;--blue:#e5eef8}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Arial,sans-serif}.app{max-width:1100px;margin:auto;padding:28px 34px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}.brand{font-size:20px;font-weight:750;letter-spacing:-.5px}.brand b{color:var(--green)}.date{color:var(--muted);font-size:13px}.greeting{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px}.eyebrow{color:var(--green);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px}h1{font-size:30px;letter-spacing:-1px;margin:4px 0}.sub{color:var(--muted);margin:0}.add{background:var(--green);color:white;border:0;border-radius:10px;padding:12px 17px;font-weight:700;font-size:14px}.grid{display:grid;grid-template-columns:1.65fr 1fr;gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:21px}.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.card h2{font-size:17px;margin:0}.small{font-size:12px;color:var(--muted)}.tasks{display:grid;gap:10px}.task{border:1px solid var(--line);border-radius:12px;padding:13px;display:flex;align-items:center;gap:12px}.check{height:19px;width:19px;border:1.5px solid #cbd4cd;border-radius:6px;flex:none}.taskname{font-weight:700;font-size:14px}.meta{color:var(--muted);font-size:12px;margin-top:3px}.tag{margin-left:auto;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}.urgent{background:var(--rose);color:#9a5147}.soon{background:var(--amber);color:#8b6c24}.later{background:var(--blue);color:#4b6890}.progress{margin-top:17px;background:#edf1ed;border-radius:8px;height:8px;overflow:hidden}.progress span{display:block;background:#69a77c;width:42%;height:100%;border-radius:8px}.progressline{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:8px}#weekGrid .day{border:0;background:transparent;font-family:inherit;cursor:pointer;width:100%}.week-nav{display:flex;gap:6px}.week-nav button{width:28px;height:28px;border:1px solid var(--line);background:white;border-radius:8px;color:var(--ink);font-size:18px;line-height:1;cursor:pointer}.week-nav button:hover{background:var(--mint)}.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center}.day{padding:10px 2px;border-radius:10px;color:var(--muted);font-size:12px}.day b{display:block;color:var(--ink);font-size:14px;margin-top:5px}.day.active{background:var(--green);color:#dcebe0}.day.active b{color:white}.upcoming{margin-top:18px}.event{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}.event:last-child{border:0}.datebox{width:42px;height:44px;display:grid;place-content:center;background:var(--mint);border-radius:10px;color:var(--green);font-size:11px;font-weight:700;text-align:center}.datebox b{font-size:17px;line-height:1.1}.event strong{font-size:13px}.event p{font-size:12px;color:var(--muted);margin:2px 0}.quote{margin-top:18px;padding:16px;border-radius:13px;background:#f3f7f3;color:#53635a;font-size:13px}.quote b{display:block;color:var(--green);margin-bottom:4px}@media(max-width:720px){.app{padding:20px 16px}.grid{grid-template-columns:1fr}.greeting{align-items:start;gap:14px;flex-direction:column}.top{margin-bottom:24px}}
+.modal-backdrop{position:fixed;inset:0;background:#17221d66;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal-backdrop.open{display:flex}.modal{background:white;border-radius:16px;padding:22px;width:min(420px,100%);box-shadow:0 18px 60px #17221d33}.modal h2{margin:0 0 14px;font-size:20px}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:13px;font-weight:700}.field input{padding:11px;border:1px solid #dce4dd;border-radius:9px;font:inherit}.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}.secondary{background:white;border:1px solid var(--line);border-radius:9px;padding:10px 14px;font-weight:700}.save{background:var(--green);color:white;border:0;border-radius:9px;padding:10px 14px;font-weight:700}.check{cursor:pointer}.task-tools{display:flex;align-items:center;gap:12px}.clear-tasks{border:0;background:transparent;color:#9a5147;font:inherit;font-size:12px;font-weight:700;cursor:pointer;padding:6px}.clear-tasks:hover{text-decoration:underline}.clear-confirm{display:none;background:#fff5f3;border:1px solid #f2d5d0;border-radius:11px;padding:12px;margin:-5px 0 14px;align-items:center;justify-content:space-between;gap:10px;font-size:13px}.clear-confirm.open{display:flex}.confirm-actions{display:flex;gap:7px;flex:none}.confirm-actions button{border-radius:8px;padding:7px 10px;font-weight:700;cursor:pointer}.cancel-clear{background:white;border:1px solid #e6d5d2}.yes-clear{background:#a94d42;color:white;border:0}.intro{position:fixed;inset:0;z-index:30;background:linear-gradient(145deg,#edf5ef,#f9fbf9);display:grid;place-items:center;padding:20px;overflow:hidden}.intro.hidden{display:none}.intro-card{width:min(440px,100%);background:white;border:1px solid #e4ebe5;border-radius:22px;padding:34px;box-shadow:0 22px 70px #2346311c;text-align:center;animation:pageDrop .9s cubic-bezier(.18,.8,.25,1) both}.intro-mark{font-size:35px;color:#347a58}.intro h1{font-size:31px;margin:8px 0}.intro p{color:#75817a;margin:5px 0 20px}.intro-form{text-align:left;display:grid;gap:13px;margin-top:22px}.intro-form label{display:grid;gap:6px;font-size:13px;font-weight:700}.intro-form input{width:100%;padding:12px;border:1px solid #dce4dd;border-radius:9px;font:inherit}.intro-submit{width:100%;background:#347a58;color:white;border:0;border-radius:10px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px}.intro-note{font-size:11px!important;margin:14px 0 0!important}.welcome-line{color:#347a58!important;font-weight:700;margin:18px 0 0!important;min-height:24px}@keyframes pageDrop{0%{opacity:0;transform:translateY(-110vh) rotate(-7deg)}70%{opacity:1;transform:translateY(12px) rotate(1deg)}100%{opacity:1;transform:translateY(0) rotate(0)}}@media(prefers-reduced-motion:reduce){.intro-card{animation:none}}
+.notes-card{margin-top:18px}.notes-area{width:100%;min-height:150px;resize:vertical;padding:14px;border:1px solid var(--line);border-radius:12px;font:14px/1.6 Arial,sans-serif;color:var(--ink);background:#fcfdfc;outline-color:#8ab79a}.notes-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}.notes-status{font-size:12px;color:var(--muted)}.clear-notes{border:0;background:transparent;color:#9a5147;font:inherit;font-size:12px;font-weight:700;cursor:pointer;padding:6px}.clear-notes:hover{text-decoration:underline}
+.video-bot{margin-top:18px}.bot-form{display:flex;gap:9px;margin-top:14px}.bot-input{flex:1;min-width:0;padding:12px;border:1px solid var(--line);border-radius:9px;font:inherit}.bot-button{border:0;border-radius:9px;background:var(--green);color:white;padding:0 16px;font-weight:700;cursor:pointer}.bot-reply{display:none;margin-top:14px;padding:13px;background:#f3f7f3;border-radius:11px;color:#53635a;font-size:14px}.bot-reply.show{display:block}.bot-reply a{display:inline-block;margin-top:7px;color:var(--green);font-weight:700}@media(max-width:480px){.bot-form{flex-wrap:wrap}.bot-button{padding:12px 16px}}
+.sound-toggle{border:1px solid var(--line);background:white;border-radius:9px;padding:8px 11px;color:var(--ink);font-weight:700;cursor:pointer;margin-right:12px}.top-right{display:flex;align-items:center}.task[draggable="true"]{cursor:grab}.task.dragging{opacity:.45}.task.drag-over{outline:2px dashed #69a77c;outline-offset:2px}.reminder-card{margin-top:18px}.reminder-form{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:13px}.reminder-form input{padding:10px;border:1px solid var(--line);border-radius:9px;font:inherit}.reminder-button{border:0;border-radius:9px;background:var(--green);color:white;padding:11px 14px;font-weight:700;cursor:pointer}.reminder-status{font-size:12px;color:var(--muted);margin-top:10px}.reminder-toast{position:fixed;right:20px;bottom:20px;z-index:40;display:none;background:#203b2a;color:white;padding:16px 18px;border-radius:13px;box-shadow:0 10px 35px #17221d33;max-width:min(360px,calc(100vw - 40px))}.reminder-toast.show{display:block;animation:pageDrop .35s ease-out}.reminder-toast strong{display:block;margin-bottom:3px}
+.event{background:#f1f7ff;border:0;border-radius:12px;padding:10px;margin-top:8px}.datebox.calendar-symbol{background:#dcecff;color:#3974b8}.calendar-symbol svg{width:21px;height:21px;display:block}.task:nth-child(4n+1){border-left:4px solid #68a77c}.task:nth-child(4n+2){border-left:4px solid #6d9ed1}.task:nth-child(4n+3){border-left:4px solid #e0ae58}.task:nth-child(4n){border-left:4px solid #bf83ba}.day:not(.active):hover{background:#edf5ef;color:var(--green)}.reminder-card{background:linear-gradient(120deg,#fff 65%,#f1f7ff)}.video-bot{background:linear-gradient(120deg,#fff 65%,#f2f8ff)}.notes-card{background:linear-gradient(120deg,#fff 70%,#fff8eb)}
+.day.has-due{position:relative}.day.has-due::after{content:"";position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:#e0ae58}.day.active.has-due::after{background:#fff}
+.task-content{flex:1;min-width:0}.task-actions{display:flex;align-items:center;gap:5px}.task-action{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 9px;font:inherit;font-size:12px;font-weight:700;color:#426c54;cursor:pointer;white-space:nowrap}.task-action:hover{background:var(--mint)}.task-action.delete-action{color:#a94d42}.task-action.delete-action:hover{background:#fff0ee}.delete-copy{color:var(--muted);margin:0 0 12px}@media(max-width:520px){.task{flex-wrap:wrap}.task-actions{width:100%;justify-content:flex-end}}
+.task-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 13px}.task-filters label{display:grid;gap:4px}.task-filters select{width:100%;min-width:0;padding:8px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink);font:inherit;font-size:12px}.backup-card{margin-top:18px}.backup-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.backup-status{color:var(--muted);font-size:12px;margin:10px 0 0}@media(max-width:560px){.app{padding:18px 12px}.top{align-items:flex-start;gap:10px;flex-wrap:wrap}.top-right{flex-wrap:wrap;justify-content:flex-end}.date{font-size:10px}.card{padding:16px}.week{gap:2px}.day{padding:8px 0;font-size:10px}.task-tools{gap:6px}.task-filters{grid-template-columns:1fr}.task-actions .task-action{padding:6px 8px}.greeting h1{font-size:26px}.add{padding:10px 12px}}
+</style></head><body><div class="intro" id="introScreen">
+ <section class="intro-card">
+  <div class="intro-mark">✳</div>
+  <div class="eyebrow">Organize seus estudos</div>
+  <h1>Bem-vindo ao <span style="color:#347a58">TarefaMix!</span></h1>
+  <p>Seu cantinho para deixar as tarefas em ordem.</p>
+  <div class="welcome-line" id="welcomeLine">Qual seu nome?</div>
+  <form class="intro-form" id="welcomeForm">
+   <label>Seu nome<input id="yourName" name="name" autocomplete="given-name" required maxlength="50" placeholder="Como podemos te chamar?"></label>
+   
+   
+   <button class="intro-submit" type="submit">Entrar no organizador</button>
+  </form>
+  <p class="intro-note">Esta demonstração só pede seu nome; não precisa de e-mail nem senha.</p>
+ </section>
+</div>
+<main class="app"><header class="top"><div class="brand">✳ <b>TarefaMix</b></div><div class="top-right"><button class="sound-toggle" id="soundToggle" type="button" title="Ligar ou desligar sons">🔊 Som ligado</button><div class="date" id="todayDate"></div></div></header><section class="greeting"><div><div class="eyebrow">Seu espaço de estudos</div><h1 id="greetingTitle">Oi! Bora organizar? 👋</h1><p class="sub">Um passo de cada vez. Você consegue.</p></div><button class="add" id="addTask">＋ Nova tarefa</button></section><div class="grid"><section class="card"><div class="cardhead"><h2>Minhas tarefas</h2><div class="task-tools"><span class="small" id="taskCount">3 tarefas</span><button class="clear-tasks" id="clearTasks" type="button">Limpar tarefas</button></div></div><div class="task-filters">
+ <label class="small">Matéria<select id="subjectFilter"><option value="">Todas as matérias</option></select></label>
+ <label class="small">Status<select id="statusFilter"><option value="">Todas</option><option value="pending">Pendentes</option><option value="done">Concluídas</option></select></label>
+ <label class="small">Prazo<select id="dueFilter"><option value="">Qualquer prazo</option><option value="dated">Com data</option><option value="undated">Sem data</option></select></label>
+</div>
+<div class="clear-confirm" id="clearConfirm"><span>Apagar todas as tarefas?</span><div class="confirm-actions"><button type="button" class="cancel-clear" id="cancelClear">Cancelar</button><button type="button" class="yes-clear" id="confirmClear">Apagar</button></div></div><div class="tasks"><div class="task"><span class="check"></span><div><div class="taskname">Estudar para a prova de Ciências</div><div class="meta">Ciências · Entrega amanhã</div></div><span class="tag urgent">Amanhã</span></div><div class="task"><span class="check"></span><div><div class="taskname">Terminar resumo de História</div><div class="meta">História · Entrega sexta-feira</div></div><span class="tag soon">Em 2 dias</span></div><div class="task"><span class="check"></span><div><div class="taskname">Fazer exercícios de Matemática</div><div class="meta">Matemática · Entrega segunda</div></div><span class="tag later">Próxima semana</span></div></div><div class="progress"><span id="progressBar"></span></div><div class="progressline"><span>Seu progresso nesta semana</span><b id="progressText">0 de 3 concluídas</b></div></section><aside class="card"><div class="cardhead"><h2 id="weekTitle">Esta semana</h2><div class="week-nav"><button type="button" id="prevWeek" aria-label="Semana anterior">‹</button><button type="button" id="nextWeek" aria-label="Próxima semana">›</button></div></div><div class="week" id="weekGrid"></div><div class="small" id="dueHeading" style="margin-top:16px">Tarefas com prazo neste dia</div><div class="upcoming" id="upcomingTasks"></div><div class="quote"><b>✨ Dica do dia</b>Comece pela tarefa mais curtinha. Riscar algo da lista dá um gás!</div></aside></div>
+<section class="card backup-card">
+ <div class="cardhead"><h2>💾 Backup</h2><span class="small">Proteja suas tarefas</span></div>
+ <p class="sub">Baixe uma cópia ou restaure um arquivo de backup do TarefaMix.</p>
+ <div class="backup-actions"><button class="reminder-button" id="downloadBackup" type="button">Baixar backup</button><button class="secondary" id="chooseBackup" type="button">Restaurar backup</button><input id="backupFile" type="file" accept=".json,application/json" hidden></div>
+ <p class="backup-status" id="backupStatus" aria-live="polite">O backup inclui tarefas, anotações e horário do lembrete.</p>
+</section>
+<section class="card backup-card"><div class="cardhead"><h2>🔔 Notificações fora do site</h2><span class="small">Próxima etapa</span></div><p class="sub">O lembrete atual funciona com o TarefaMix aberto. Para avisar com o site fechado, será preciso publicar o TarefaMix em HTTPS e configurar um serviço de notificações push.</p></section>
+<section class="card reminder-card">
+ <div class="cardhead"><h2>⏰ Lembrete de estudo</h2><span class="small">Todos os dias</span></div>
+ <p class="sub">Escolha um horário para lembrar você de estudar.</p>
+ <div class="reminder-form"><label for="reminderTime" class="small">Horário:</label><input type="time" id="reminderTime" value="18:00"><button class="reminder-button" id="saveReminder" type="button">Ativar lembrete</button><button class="secondary" id="disableReminder" type="button" style="display:none">Desativar</button></div>
+ <div class="reminder-status" id="reminderStatus">O lembrete toca enquanto esta página estiver aberta.</div>
+</section>
+<section class="card video-bot">
+ <div class="cardhead"><h2>🤖 Bot de vídeos</h2><span class="small">Ajuda rápida para estudar</span></div>
+ <p class="sub">Digite uma matéria e eu procuro vídeos para você.</p>
+ <form class="bot-form" id="videoBotForm"><input class="bot-input" id="subjectSearch" maxlength="80" required placeholder="Ex.: frações, história do Brasil"><button class="bot-button" type="submit">Buscar vídeo</button></form>
+ <div class="bot-reply" id="botReply" aria-live="polite"></div>
+</section>
+<section class="card notes-card">
+ <div class="cardhead"><h2>Minhas anotações</h2><span class="small">Suas ideias em um só lugar</span></div>
+ <textarea class="notes-area" id="notesArea" maxlength="5000" placeholder="Escreva aqui lembretes, ideias ou notas da aula..."></textarea>
+ <div class="notes-footer"><span class="notes-status" id="notesStatus">Salvo automaticamente neste navegador</span><button type="button" class="clear-notes" id="clearNotes">Limpar anotações</button></div>
+</section>
+<div class="modal-backdrop" id="taskModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <form class="modal" id="taskForm">
+    <h2 id="modalTitle">Adicionar tarefa</h2>
+    <div class="field"><label for="taskName">O que você precisa fazer?</label><input id="taskName" required maxlength="100" placeholder="Ex.: estudar para Ciências"></div>
+    <div class="field"><label for="taskSubject">Matéria</label><input id="taskSubject" maxlength="40" placeholder="Ex.: Ciências"></div>
+    <div class="field"><label for="taskDue">Prazo</label><input id="taskDue" type="date"></div>
+    <div class="modal-actions"><button type="button" class="secondary" id="cancelTask">Cancelar</button><button class="save" id="saveTaskButton" type="submit">Salvar tarefa</button></div>
+  </form>
+</div>
+<div class="reminder-toast" id="reminderToast" role="status"><strong>Hora de estudar! 📚</strong>Seu lembrete do TarefaMix chegou.</div>
+<div class="modal-backdrop" id="restoreModal" role="dialog" aria-modal="true" aria-labelledby="restoreTitle">
+ <section class="modal"><h2 id="restoreTitle">Restaurar este backup?</h2><p class="delete-copy">Isso substituirá as tarefas e anotações atuais deste navegador.</p><div class="modal-actions"><button type="button" class="secondary" id="cancelRestore">Cancelar</button><button type="button" class="save" id="confirmRestore">Restaurar dados</button></div></section>
+</div>
+<div class="modal-backdrop" id="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteTitle">
+ <section class="modal"><h2 id="deleteTitle">Apagar esta tarefa?</h2><p class="delete-copy" id="deleteCopy"></p><div class="modal-actions"><button type="button" class="secondary" id="cancelDelete">Cancelar</button><button type="button" class="yes-clear" id="confirmDelete">Apagar tarefa</button></div></section>
+</div>
+</main><script>
+(() => {
+  const list = document.querySelector('.tasks');
+  const modal = document.querySelector('#taskModal');
+  const form = document.querySelector('#taskForm');
+  const addButton = document.querySelector('#addTask');
+  const progressBar = document.querySelector('#progressBar');
+  const progressText = document.querySelector('#progressText');
+  const taskCount = document.querySelector('#taskCount');
+  const clearConfirm = document.querySelector('#clearConfirm');
+  const notesArea = document.querySelector('#notesArea');
+  const notesStatus = document.querySelector('#notesStatus');
+  const storageKey = 'meu-planner-tarefas-v1';
+  function loadTasks() {
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (saved) return JSON.parse(saved);
+    } catch (_) {}
+    return [...list.querySelectorAll('.task')].map(row => ({
+      name: row.querySelector('.taskname').textContent,
+      subject: row.querySelector('.meta').textContent.split(' · ')[0],
+      due: row.querySelector('.meta').textContent.split(' · ')[1] || 'Sem prazo',
+      done: false
+    }));
+  }
+  let tasks = loadTasks();
+  let draggingIndex = null;
+  let editingIndex = null;
+  let pendingDeleteIndex = null;
+  function save() { try { localStorage.setItem(storageKey, JSON.stringify(tasks)); } catch (_) {} }
+  function taskDueDate(task) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(task.due || '')) return null;
+    const [year, month, day] = task.due.split('-').map(Number);
+    const date = new Date(year, month - 1, day);
+    return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day ? date : null;
+  }
+  function formatTaskDue(task) {
+    const date = taskDueDate(task);
+    return date ? date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long' }) : (task.due || 'Sem prazo');
+  }
+  function render() {
+    list.innerHTML = '';
+    const subjectSelect = document.querySelector('#subjectFilter');
+    const chosenSubject = subjectSelect.value;
+    const subjects = [...new Set(tasks.map(task => task.subject || 'Geral'))].sort((a, b) => a.localeCompare(b));
+    subjectSelect.innerHTML = '<option value="">Todas as matérias</option>';
+    subjects.forEach(subject => { const option = document.createElement('option'); option.value = subject; option.textContent = subject; subjectSelect.append(option); });
+    subjectSelect.value = subjects.includes(chosenSubject) ? chosenSubject : '';
+    const subjectFilter = subjectSelect.value;
+    const statusFilter = document.querySelector('#statusFilter').value;
+    const dueFilter = document.querySelector('#dueFilter').value;
+    let visibleCount = 0;
+    tasks.forEach((task, index) => {
+      if (subjectFilter && (task.subject || 'Geral') !== subjectFilter) return;
+      if (statusFilter === 'pending' && task.done || statusFilter === 'done' && !task.done) return;
+      const hasDate = Boolean(taskDueDate(task));
+      if (dueFilter === 'dated' && !hasDate || dueFilter === 'undated' && hasDate) return;
+      visibleCount++;
+      const row = document.createElement('div'); row.className = 'task';
+      row.draggable = true;
+      row.addEventListener('dragstart', event => { draggingIndex = index; row.classList.add('dragging'); event.dataTransfer.effectAllowed = 'move'; });
+      row.addEventListener('dragend', () => { draggingIndex = null; row.classList.remove('dragging'); document.querySelectorAll('.task.drag-over').forEach(item => item.classList.remove('drag-over')); });
+      row.addEventListener('dragover', event => { event.preventDefault(); row.classList.add('drag-over'); });
+      row.addEventListener('dragleave', () => row.classList.remove('drag-over'));
+      row.addEventListener('drop', event => {
+        event.preventDefault(); row.classList.remove('drag-over');
+        if (draggingIndex === null || draggingIndex === index) return;
+        const moved = tasks.splice(draggingIndex, 1)[0];
+        tasks.splice(index, 0, moved); save(); render();
+      });
+      const checkbox = document.createElement('button'); checkbox.className = 'check'; checkbox.type = 'button';
+      checkbox.setAttribute('aria-label', task.done ? 'Marcar como pendente' : 'Marcar como concluída');
+      checkbox.style.cssText = task.done ? 'background:#347a58;border-color:#347a58;color:white' : 'background:white';
+      checkbox.textContent = task.done ? '✓' : '';
+      const info = document.createElement('div'); info.className = 'task-content';
+      const title = document.createElement('div'); title.className = 'taskname'; title.textContent = task.name;
+      if (task.done) title.style.cssText = 'text-decoration:line-through;color:#87918a';
+      const meta = document.createElement('div'); meta.className = 'meta'; meta.textContent = `${task.subject} · ${formatTaskDue(task)}`;
+            info.append(title, meta); row.append(checkbox, info);
+      const actions = document.createElement('div'); actions.className = 'task-actions';
+      const editButton = document.createElement('button'); editButton.type = 'button'; editButton.className = 'task-action'; editButton.textContent = 'Editar';
+      editButton.addEventListener('click', () => openEditTask(index));
+      const deleteButton = document.createElement('button'); deleteButton.type = 'button'; deleteButton.className = 'task-action delete-action'; deleteButton.textContent = 'Apagar';
+      deleteButton.addEventListener('click', () => openDeleteTask(index));
+      actions.append(editButton, deleteButton); row.append(actions);
+      checkbox.addEventListener('click', () => { tasks[index].done = !tasks[index].done; save(); render(); });
+      list.append(row);
+    });
+    const done = tasks.filter(task => task.done).length;
+    taskCount.textContent = `${tasks.length} ${tasks.length === 1 ? 'tarefa' : 'tarefas'}`;
+    progressText.textContent = `${done} de ${tasks.length} concluídas`;
+    progressBar.style.width = `${tasks.length ? Math.round(done / tasks.length * 100) : 0}%`;
+    renderUpcomingTasks();
+    renderCalendar();
+  }
+  function closeModal() {
+    modal.classList.remove('open'); form.reset(); editingIndex = null;
+    document.querySelector('#modalTitle').textContent = 'Adicionar tarefa';
+    document.querySelector('#saveTaskButton').textContent = 'Salvar tarefa';
+    addButton.focus();
+  }
+  function openEditTask(index) {
+    const task = tasks[index]; editingIndex = index;
+    document.querySelector('#taskName').value = task.name;
+    document.querySelector('#taskSubject').value = task.subject || '';
+    document.querySelector('#taskDue').value = taskDueDate(task) ? task.due : '';
+    document.querySelector('#modalTitle').textContent = 'Editar tarefa';
+    document.querySelector('#saveTaskButton').textContent = 'Salvar alterações';
+    modal.classList.add('open'); document.querySelector('#taskName').focus();
+  }
+  function openDeleteTask(index) {
+    pendingDeleteIndex = index;
+    document.querySelector('#deleteCopy').textContent = `A tarefa “${tasks[index].name}” será removida.`;
+    document.querySelector('#deleteModal').classList.add('open');
+  }
+  function closeDeleteTask() { pendingDeleteIndex = null; document.querySelector('#deleteModal').classList.remove('open'); }
+  ['#subjectFilter', '#statusFilter', '#dueFilter'].forEach(selector => document.querySelector(selector).addEventListener('change', render));
+  addButton.addEventListener('click', () => {
+    editingIndex = null; form.reset();
+    document.querySelector('#modalTitle').textContent = 'Adicionar tarefa';
+    document.querySelector('#saveTaskButton').textContent = 'Salvar tarefa';
+    modal.classList.add('open'); document.querySelector('#taskName').focus();
+  });  document.querySelector('#cancelTask').addEventListener('click', closeModal);
+  document.querySelector('#clearTasks').addEventListener('click', () => clearConfirm.classList.add('open'));
+  document.querySelector('#cancelClear').addEventListener('click', () => clearConfirm.classList.remove('open'));
+  document.querySelector('#confirmClear').addEventListener('click', () => {
+    tasks = [];
+    save();
+    render();
+    clearConfirm.classList.remove('open');
+  });
+  modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const name = document.querySelector('#taskName').value.trim();
+    if (!name) return;
+    const updated = {
+      name,
+      subject: document.querySelector('#taskSubject').value.trim() || 'Geral',
+      due: document.querySelector('#taskDue').value.trim() || 'Sem prazo',
+      done: editingIndex === null ? false : tasks[editingIndex].done
+    };
+    if (editingIndex === null) tasks.push(updated); else tasks[editingIndex] = updated;
+    save(); render(); closeModal();
+  });
+  document.querySelector('#cancelDelete').addEventListener('click', closeDeleteTask);
+  document.querySelector('#confirmDelete').addEventListener('click', () => {
+    if (pendingDeleteIndex !== null) tasks.splice(pendingDeleteIndex, 1);
+    save(); render(); closeDeleteTask();
+  });
+  try { notesArea.value = localStorage.getItem('meu-planner-anotacoes-v1') || ''; } catch (_) {}
+  notesArea.addEventListener('input', () => {
+    try {
+      localStorage.setItem('meu-planner-anotacoes-v1', notesArea.value);
+      notesStatus.textContent = 'Salvo automaticamente neste navegador';
+    } catch (_) { notesStatus.textContent = 'Não foi possível salvar neste navegador'; }
+  });
+  document.querySelector('#clearNotes').addEventListener('click', () => {
+    notesArea.value = '';
+    try { localStorage.removeItem('meu-planner-anotacoes-v1'); } catch (_) {}
+    notesStatus.textContent = 'Anotações apagadas';
+  });
+  let pendingBackup = null;
+  document.querySelector('#downloadBackup').addEventListener('click', () => {
+    const backup = {
+      format: 'tarefamix-backup', version: 1, exportedAt: new Date().toISOString(),
+      tasks, notes: notesArea.value,
+      reminderTime: localStorage.getItem('meu-planner-lembrete') || '',
+      soundEnabled: soundEnabled
+    };
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob); const link = document.createElement('a');
+    link.href = url; link.download = `tarefamix-backup-${new Date().toISOString().slice(0,10)}.json`;
+    link.click(); window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    document.querySelector('#backupStatus').textContent = 'Backup baixado para o seu dispositivo.';
+  });
+  document.querySelector('#chooseBackup').addEventListener('click', () => document.querySelector('#backupFile').click());
+  document.querySelector('#backupFile').addEventListener('change', async event => {
+    const file = event.target.files[0]; if (!file) return;
+    try {
+      const backup = JSON.parse(await file.text());
+      const validTask = task => task && typeof task.name === 'string' && task.name.length <= 100 && typeof task.subject === 'string' && task.subject.length <= 40 && typeof task.due === 'string' && task.due.length <= 80 && typeof task.done === 'boolean';
+      if (!['tarefamix-backup', 'estudiva-backup', 'orgest-backup'].includes(backup.format) || backup.version !== 1 || !Array.isArray(backup.tasks) || backup.tasks.length > 500 || !backup.tasks.every(validTask) || typeof backup.notes !== 'string' || backup.notes.length > 5000 || typeof backup.reminderTime !== 'string' || (backup.reminderTime && !/^\d{2}:\d{2}$/.test(backup.reminderTime))) throw new Error('Arquivo inválido');
+      pendingBackup = backup; document.querySelector('#restoreModal').classList.add('open');
+      document.querySelector('#backupStatus').textContent = 'Backup reconhecido. Confirme para restaurar.';
+    } catch (_) { document.querySelector('#backupStatus').textContent = 'Não consegui ler esse arquivo. Escolha um backup do TarefaMix.'; }
+    event.target.value = '';
+  });
+  function closeRestore() { pendingBackup = null; document.querySelector('#restoreModal').classList.remove('open'); }
+  document.querySelector('#cancelRestore').addEventListener('click', closeRestore);
+  document.querySelector('#confirmRestore').addEventListener('click', () => {
+    if (!pendingBackup) return;
+    tasks = pendingBackup.tasks.map(task => ({ ...task })); save(); render();
+    notesArea.value = pendingBackup.notes;
+    try { localStorage.setItem('meu-planner-anotacoes-v1', pendingBackup.notes); } catch (_) {}
+    soundEnabled = pendingBackup.soundEnabled !== false;
+    try { localStorage.setItem('meu-planner-som', soundEnabled ? 'on' : 'off'); } catch (_) {}
+    updateSoundButton();
+    if (pendingBackup.reminderTime) {
+      try { localStorage.setItem('meu-planner-lembrete', pendingBackup.reminderTime); } catch (_) {}
+      reminderTime.value = pendingBackup.reminderTime; scheduleReminder(pendingBackup.reminderTime); setReminderUI(true, pendingBackup.reminderTime);
+    } else {
+      if (reminderTimer) window.clearTimeout(reminderTimer); reminderTimer = null;
+      try { localStorage.removeItem('meu-planner-lembrete'); } catch (_) {}
+      saveReminderButton.textContent = 'Ativar lembrete'; disableReminderButton.style.display = 'none';
+      reminderStatus.textContent = 'Lembrete desativado.';
+    }
+    document.querySelector('#backupStatus').textContent = 'Backup restaurado neste navegador.';
+    closeRestore();
+  });
+  let audioContext = null;
+  const soundToggle = document.querySelector('#soundToggle');
+  let soundEnabled = localStorage.getItem('meu-planner-som') !== 'off';
+  function updateSoundButton() { soundToggle.textContent = soundEnabled ? '🔊 Som ligado' : '🔇 Som desligado'; }
+  updateSoundButton();
+  soundToggle.addEventListener('click', () => {
+    soundEnabled = !soundEnabled;
+    try { localStorage.setItem('meu-planner-som', soundEnabled ? 'on' : 'off'); } catch (_) {}
+    updateSoundButton();
+  });
+  document.addEventListener('click', event => {
+    if (!soundEnabled || !event.target.closest('button')) return;
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+      audioContext = audioContext || new AudioContextClass();
+      if (audioContext.state === 'suspended') audioContext.resume();
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      oscillator.type = 'sine'; oscillator.frequency.value = 620;
+      gain.gain.setValueAtTime(0.045, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.07);
+      oscillator.connect(gain); gain.connect(audioContext.destination);
+      oscillator.start(); oscillator.stop(audioContext.currentTime + 0.07);
+    } catch (_) {}
+  });
+
+  const reminderTime = document.querySelector('#reminderTime');
+  const reminderStatus = document.querySelector('#reminderStatus');
+  const reminderToast = document.querySelector('#reminderToast');
+  const saveReminderButton = document.querySelector('#saveReminder');
+  const disableReminderButton = document.querySelector('#disableReminder');
+  let reminderTimer = null;
+  function showReminder() {
+    reminderToast.classList.add('show');
+    window.setTimeout(() => reminderToast.classList.remove('show'), 15000);
+    try {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('Hora de estudar! 📚', { body: 'Seu lembrete do TarefaMix chegou.' });
+      }
+    } catch (_) {}
+  }
+  function scheduleReminder(time) {
+    if (reminderTimer) window.clearTimeout(reminderTimer);
+    const [hours, minutes] = time.split(':').map(Number);
+    const now = new Date();
+    const next = new Date(); next.setHours(hours, minutes, 0, 0);
+    if (next <= now) next.setDate(next.getDate() + 1);
+    reminderTimer = window.setTimeout(() => { showReminder(); scheduleReminder(time); }, next.getTime() - now.getTime());
+  }
+  function setReminderUI(active, time) {
+    saveReminderButton.textContent = active ? 'Atualizar horário' : 'Ativar lembrete';
+    disableReminderButton.style.display = active ? 'inline-block' : 'none';
+    if (active) reminderStatus.textContent = `Lembrete diário às ${time}. Deixe a página aberta para receber o aviso.`;
+  }
+  saveReminderButton.addEventListener('click', async () => {
+    const time = reminderTime.value;
+    if (!time) { reminderStatus.textContent = 'Escolha um horário primeiro.'; return; }
+    if ('Notification' in window && Notification.permission === 'default') {
+      try { await Notification.requestPermission(); } catch (_) {}
+    }
+    try { localStorage.setItem('meu-planner-lembrete', time); } catch (_) {}
+    scheduleReminder(time); setReminderUI(true, time);
+  });
+  disableReminderButton.addEventListener('click', () => {
+    if (reminderTimer) window.clearTimeout(reminderTimer);
+    reminderTimer = null;
+    try { localStorage.removeItem('meu-planner-lembrete'); } catch (_) {}
+    saveReminderButton.textContent = 'Ativar lembrete';
+    disableReminderButton.style.display = 'none';
+    reminderStatus.textContent = 'Lembrete desativado.';
+  });
+  try {
+    const savedReminder = localStorage.getItem('meu-planner-lembrete');
+    if (savedReminder) { reminderTime.value = savedReminder; scheduleReminder(savedReminder); setReminderUI(true, savedReminder); }
+  } catch (_) {}
+
+  document.querySelector('#videoBotForm').addEventListener('submit', event => {
+    event.preventDefault();
+    const subject = document.querySelector('#subjectSearch').value.trim();
+    if (!subject) return;
+    const query = encodeURIComponent(`${subject} aula explicação`);
+    const link = `https://www.youtube.com/results?search_query=${query}`;
+    const reply = document.querySelector('#botReply');
+    reply.replaceChildren();
+    reply.append(document.createTextNode(`Encontrei uma busca de vídeos sobre “${subject}”.`));
+    const anchor = document.createElement('a');
+    anchor.href = link; anchor.target = '_blank'; anchor.rel = 'noopener noreferrer';
+    anchor.textContent = 'Ver vídeos no YouTube ↗';
+    reply.append(document.createElement('br'), anchor);
+    reply.classList.add('show');
+  });
+  let weekOffset = 0;
+  let selectedDate = new Date();
+  const weekGrid = document.querySelector('#weekGrid');
+  const weekTitle = document.querySelector('#weekTitle');
+  function dateOnly(date) { return new Date(date.getFullYear(), date.getMonth(), date.getDate()); }
+  function renderCalendar() {
+    const today = dateOnly(new Date());
+    const focus = new Date(today); focus.setDate(focus.getDate() + weekOffset * 7);
+    const monday = new Date(focus); monday.setDate(focus.getDate() - ((focus.getDay() + 6) % 7));
+    const sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
+    const monthLabel = date => date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' }).replace('.', '');
+    weekTitle.textContent = weekOffset === 0 ? 'Esta semana' : `${monthLabel(monday)} – ${monthLabel(sunday)}`;
+    weekGrid.innerHTML = '';
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(monday); date.setDate(monday.getDate() + i);
+      const day = document.createElement('button'); day.type = 'button'; day.className = 'day';
+      if (dateOnly(date).getTime() === dateOnly(selectedDate).getTime()) day.classList.add('active');
+      if (tasks.some(task => { const due = taskDueDate(task); return due && dateOnly(due).getTime() === dateOnly(date).getTime(); })) day.classList.add('has-due');
+      day.innerHTML = `<span>${date.toLocaleDateString('pt-BR', { weekday: 'short' }).replace('.', '').slice(0,3).toUpperCase()}</span><b>${date.getDate()}</b>`;
+      day.addEventListener('click', () => { selectedDate = date; renderCalendar(); renderUpcomingTasks(); });
+      weekGrid.append(day);
+    }
+  }
+  document.querySelector('#prevWeek').addEventListener('click', () => { weekOffset--; selectedDate.setDate(selectedDate.getDate() - 7); renderCalendar(); renderUpcomingTasks(); });
+  document.querySelector('#nextWeek').addEventListener('click', () => { weekOffset++; selectedDate.setDate(selectedDate.getDate() + 7); renderCalendar(); renderUpcomingTasks(); });
+  document.querySelector('#todayDate').textContent = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' }).toUpperCase();
+  function renderUpcomingTasks() {
+    const upcoming = document.querySelector('#upcomingTasks'); upcoming.innerHTML = '';
+    const heading = document.querySelector('#dueHeading');
+    heading.textContent = `Tarefas com prazo em ${selectedDate.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })}`;
+    const selectedTime = dateOnly(selectedDate).getTime();
+    const withDueDate = tasks.filter(task => { const due = taskDueDate(task); return due && dateOnly(due).getTime() === selectedTime; });
+    if (!withDueDate.length) { upcoming.innerHTML = '<p class="small" style="margin:10px 0">Nenhuma tarefa vence neste dia.</p>'; return; }
+    withDueDate.forEach(task => {
+      const event = document.createElement('div'); event.className = 'event';
+      const datebox = document.createElement('div'); datebox.className = 'datebox calendar-symbol'; datebox.setAttribute('aria-hidden', 'true'); datebox.innerHTML = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="5" width="17" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M7 3.5v4M17 3.5v4M4 10h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 14h2M14 14h2M8 17h2" stroke="#e2a23a" stroke-width="2" stroke-linecap="round"/></svg>';
+      const info = document.createElement('div'); info.className = 'task-content'; const title = document.createElement('strong'); title.textContent = task.name;
+      const due = document.createElement('p'); due.textContent = formatTaskDue(task);
+      info.append(title, due); event.append(datebox, info); upcoming.append(event);
+    });
+  }  renderCalendar();
+  render();
+  const greetingTitle = document.querySelector('#greetingTitle');
+  function setGreeting(name) { greetingTitle.textContent = `Oi, ${name}! Bora organizar? 👋`; }
+  try { const savedName = localStorage.getItem('orgest-nome'); if (savedName) setGreeting(savedName); } catch (_) {}
+  const welcomeForm = document.querySelector('#welcomeForm');
+  welcomeForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const name = document.querySelector('#yourName').value.trim();
+    document.querySelector('#welcomeLine').textContent = `Que bom ter você aqui, ${name}!`;
+    try { localStorage.setItem('orgest-nome', name); } catch (_) {}
+    setGreeting(name);
+    document.querySelector('#introScreen').classList.add('hidden');
+    welcomeForm.reset();
+  });
+})();
+</script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
