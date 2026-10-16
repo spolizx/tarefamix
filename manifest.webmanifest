@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "TarefaMix — Organizador de estudos e trabalho",
+  "short_name": "TarefaMix",
+  "description": "Organize tarefas, estudos e atividades de trabalho.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f7f9f7",
+  "theme_color": "#347a58",
+  "icons": [
+    { "src": "./icons/tarefamix-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "./icons/tarefamix-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
