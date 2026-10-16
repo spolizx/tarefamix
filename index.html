@@ -104,23 +104,32 @@
   const notesArea = document.querySelector('#notesArea');
   const notesStatus = document.querySelector('#notesStatus');
   const storageKey = 'meu-planner-tarefas-v1';
+  const starterExamples = [
+    ['Estudar para a prova de Ciências', 'Ciências', 'Entrega amanhã'],
+    ['Terminar resumo de História', 'História', 'Entrega sexta-feira'],
+    ['Fazer exercícios de Matemática', 'Matemática', 'Entrega segunda']
+  ];
+  function isStarterExample(task) {
+    return starterExamples.some(([name, subject, due]) =>
+      task.name === name && task.subject === subject && task.due === due
+    );
+  }
   function loadTasks() {
     try {
       const saved = localStorage.getItem(storageKey);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed.filter(task => !isStarterExample(task));
+      }
     } catch (_) {}
-    return [...list.querySelectorAll('.task')].map(row => ({
-      name: row.querySelector('.taskname').textContent,
-      subject: row.querySelector('.meta').textContent.split(' · ')[0],
-      due: row.querySelector('.meta').textContent.split(' · ')[1] || 'Sem prazo',
-      done: false
-    }));
+    return [];
   }
   let tasks = loadTasks();
   let draggingIndex = null;
   let editingIndex = null;
   let pendingDeleteIndex = null;
   function save() { try { localStorage.setItem(storageKey, JSON.stringify(tasks)); } catch (_) {} }
+  save();
   function taskDueDate(task) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(task.due || '')) return null;
     const [year, month, day] = task.due.split('-').map(Number);
