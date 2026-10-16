@@ -15,6 +15,7 @@
 .task-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 13px}.task-filters label{display:grid;gap:4px}.task-filters select{width:100%;min-width:0;padding:8px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink);font:inherit;font-size:12px}.backup-card{margin-top:18px}.backup-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.backup-status{color:var(--muted);font-size:12px;margin:10px 0 0}@media(max-width:560px){.app{padding:18px 12px}.top{align-items:flex-start;gap:10px;flex-wrap:wrap}.top-right{flex-wrap:wrap;justify-content:flex-end}.date{font-size:10px}.card{padding:16px}.week{gap:2px}.day{padding:8px 0;font-size:10px}.task-tools{gap:6px}.task-filters{grid-template-columns:1fr}.task-actions .task-action{padding:6px 8px}.greeting h1{font-size:26px}.add{padding:10px 12px}}
 .push-tutorial{margin-top:18px}.push-intro{margin:-6px 0 16px}.push-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.push-step{border:1px solid var(--line);border-radius:13px;padding:14px;background:#fcfdfc;min-width:0}.push-art{width:100%;height:112px;display:block;margin:0 auto 10px}.push-step h3{font-size:14px;margin:0 0 5px}.push-step p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}.push-note{margin-top:14px;padding:12px 14px;background:#fff8e9;border-radius:11px;color:#735b25;font-size:12px}.push-note strong{display:block;margin-bottom:3px}@media(max-width:650px){.push-steps{grid-template-columns:1fr}.push-step{display:grid;grid-template-columns:100px 1fr;align-items:center;gap:12px}.push-art{height:84px;margin:0}}
 .empty-state{padding:28px 16px;text-align:center;color:var(--muted);font-size:14px;border:1px dashed #dce5dd;border-radius:12px;background:#fbfdfb}
+.app{animation:appArrive .65s cubic-bezier(.2,.75,.25,1) both}.card{transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}.card:hover{transform:translateY(-2px);box-shadow:0 12px 30px #203b2a0c;border-color:#d8e5db}.task{transition:transform .2s ease,box-shadow .2s ease,background .2s ease}.task:hover{transform:translateX(3px);box-shadow:0 5px 16px #203b2a12}.task.task-done{background:#f5faf6}.check{transition:transform .18s ease,background .18s ease}.check:active{transform:scale(.86)}button{transition:transform .16s ease,filter .16s ease,box-shadow .16s ease}button:hover{filter:brightness(1.04)}button:active{transform:scale(.96)}.week-nav button:hover,.task-action:hover,.sound-toggle:hover{transform:translateY(-2px);box-shadow:0 4px 12px #203b2a12}.task{animation:taskEnter .32s cubic-bezier(.2,.7,.25,1) both}.task:nth-child(2){animation-delay:.035s}.task:nth-child(3){animation-delay:.07s}.task:nth-child(4){animation-delay:.105s}.day{animation:dayPop .28s cubic-bezier(.2,.7,.25,1) both}.day:nth-child(2){animation-delay:.025s}.day:nth-child(3){animation-delay:.05s}.day:nth-child(4){animation-delay:.075s}.day:nth-child(5){animation-delay:.1s}.day:nth-child(6){animation-delay:.125s}.day:nth-child(7){animation-delay:.15s}.event{animation:eventIn .3s ease both}.modal-backdrop.open .modal{animation:modalIn .24s cubic-bezier(.2,.75,.25,1) both}.reminder-toast.show{animation:toastIn .4s cubic-bezier(.16,1,.3,1) both}.sound-control{position:relative;margin-right:10px}.sound-settings{position:absolute;right:0;top:calc(100% + 8px);z-index:20;width:220px;padding:13px;background:white;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 30px #17221d24}.sound-settings summary{list-style:none;cursor:pointer;color:var(--muted);font-size:12px;font-weight:700}.sound-settings summary::-webkit-details-marker{display:none}.sound-settings label{display:flex;align-items:center;gap:9px;margin-top:9px;font-size:12px;font-weight:700}.sound-settings input{width:100%;accent-color:var(--green)}.sound-settings output{min-width:34px;color:var(--green);text-align:right}.sound-settings[open]{animation:modalIn .18s ease-out both}@keyframes appArrive{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes taskEnter{from{opacity:0;transform:translateY(9px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes dayPop{from{opacity:0;transform:translateY(5px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes eventIn{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}@keyframes modalIn{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes toastIn{0%{opacity:0;transform:translateY(25px) scale(.94)}70%{opacity:1;transform:translateY(-3px) scale(1.01)}100%{opacity:1;transform:translateY(0) scale(1)}}@media(prefers-reduced-motion:reduce){.app,.task,.day,.event,.modal-backdrop.open .modal,.reminder-toast.show,.sound-settings[open]{animation:none!important}.card,button,.task,.check{transition:none!important}.card:hover,.task:hover,button:active,button:hover{transform:none!important}}
 </style></head><body><div class="intro" id="introScreen">
  <section class="intro-card">
   <div class="intro-mark">✳</div>
@@ -31,7 +32,7 @@
   <p class="intro-note">Esta demonstração só pede seu nome; não precisa de e-mail nem senha.</p>
  </section>
 </div>
-<main class="app"><header class="top"><div class="brand">✳ <b>TarefaMix</b></div><div class="top-right"><button class="sound-toggle" id="soundToggle" type="button" title="Ligar ou desligar sons">🔊 Som ligado</button><div class="date" id="todayDate"></div></div></header><section class="greeting"><div><div class="eyebrow">Seu espaço de estudos</div><h1 id="greetingTitle">Oi! Bora organizar? 👋</h1><p class="sub">Um passo de cada vez. Você consegue.</p></div><button class="add" id="addTask">＋ Nova tarefa</button></section><div class="grid"><section class="card"><div class="cardhead"><h2>Minhas tarefas</h2><div class="task-tools"><span class="small" id="taskCount">3 tarefas</span><button class="clear-tasks" id="clearTasks" type="button">Limpar tarefas</button></div></div><div class="task-filters">
+<main class="app"><header class="top"><div class="brand">✳ <b>TarefaMix</b></div><div class="top-right"><div class="sound-control"><button class="sound-toggle" id="soundToggle" type="button" title="Ligar ou desligar sons" aria-pressed="true">🔊 Som ligado</button><details class="sound-settings"><summary>⚙️ Volume dos sons</summary><label for="soundVolume">Volume <input id="soundVolume" type="range" min="0" max="100" value="75"><output id="soundVolumeValue" for="soundVolume">75%</output></label></details></div><div class="date" id="todayDate"></div></div></header><section class="greeting"><div><div class="eyebrow">Seu espaço de estudos</div><h1 id="greetingTitle">Oi! Bora organizar? 👋</h1><p class="sub">Um passo de cada vez. Você consegue.</p></div><button class="add" id="addTask">＋ Nova tarefa</button></section><div class="grid"><section class="card"><div class="cardhead"><h2>Minhas tarefas</h2><div class="task-tools"><span class="small" id="taskCount">3 tarefas</span><button class="clear-tasks" id="clearTasks" type="button">Limpar tarefas</button></div></div><div class="task-filters">
  <label class="small">Matéria<select id="subjectFilter"><option value="">Todas as matérias</option></select></label>
  <label class="small">Status<select id="statusFilter"><option value="">Todas</option><option value="pending">Pendentes</option><option value="done">Concluídas</option></select></label>
  <label class="small">Prazo<select id="dueFilter"><option value="">Qualquer prazo</option><option value="dated">Com data</option><option value="undated">Sem data</option></select></label>
@@ -164,7 +165,7 @@
       const hasDate = Boolean(taskDueDate(task));
       if (dueFilter === 'dated' && !hasDate || dueFilter === 'undated' && hasDate) return;
       visibleCount++;
-      const row = document.createElement('div'); row.className = 'task';
+      const row = document.createElement('div'); row.className = task.done ? 'task task-done' : 'task';
       row.draggable = true;
       row.addEventListener('dragstart', event => { draggingIndex = index; row.classList.add('dragging'); event.dataTransfer.effectAllowed = 'move'; });
       row.addEventListener('dragend', () => { draggingIndex = null; row.classList.remove('dragging'); document.querySelectorAll('.task.drag-over').forEach(item => item.classList.remove('drag-over')); });
@@ -274,7 +275,7 @@
       format: 'tarefamix-backup', version: 1, exportedAt: new Date().toISOString(),
       tasks, notes: notesArea.value,
       reminderTime: localStorage.getItem('meu-planner-lembrete') || '',
-      soundEnabled: soundEnabled
+      soundEnabled: soundEnabled, soundLevel: soundLevel
     };
     const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob); const link = document.createElement('a');
@@ -302,7 +303,10 @@
     notesArea.value = pendingBackup.notes;
     try { localStorage.setItem('meu-planner-anotacoes-v1', pendingBackup.notes); } catch (_) {}
     soundEnabled = pendingBackup.soundEnabled !== false;
+    soundLevel = Math.max(0, Math.min(100, Number(pendingBackup.soundLevel ?? soundLevel)));
+    soundVolume.value = soundLevel; soundVolumeValue.value = `${soundLevel}%`;
     try { localStorage.setItem('meu-planner-som', soundEnabled ? 'on' : 'off'); } catch (_) {}
+    try { localStorage.setItem('meu-planner-volume', String(soundLevel)); } catch (_) {}
     updateSoundButton();
     if (pendingBackup.reminderTime) {
       try { localStorage.setItem('meu-planner-lembrete', pendingBackup.reminderTime); } catch (_) {}
@@ -318,29 +322,64 @@
   });
   let audioContext = null;
   const soundToggle = document.querySelector('#soundToggle');
+  const soundVolume = document.querySelector('#soundVolume');
+  const soundVolumeValue = document.querySelector('#soundVolumeValue');
   let soundEnabled = localStorage.getItem('meu-planner-som') !== 'off';
-  function updateSoundButton() { soundToggle.textContent = soundEnabled ? '🔊 Som ligado' : '🔇 Som desligado'; }
+  let soundLevel = Number(localStorage.getItem('meu-planner-volume') || 75);
+  soundLevel = Math.max(0, Math.min(100, Number.isFinite(soundLevel) ? soundLevel : 75));
+  soundVolume.value = soundLevel; soundVolumeValue.value = `${soundLevel}%`;
+  function updateSoundButton() {
+    soundToggle.textContent = soundEnabled ? '🔊 Som ligado' : '🔇 Som desligado';
+    soundToggle.setAttribute('aria-pressed', String(soundEnabled));
+    soundToggle.title = soundEnabled ? 'Desligar sons' : 'Ligar sons';
+  }
   updateSoundButton();
+  soundVolume.addEventListener('input', () => {
+    soundLevel = Number(soundVolume.value); soundVolumeValue.value = `${soundLevel}%`;
+    try { localStorage.setItem('meu-planner-volume', String(soundLevel)); } catch (_) {}
+  });
   soundToggle.addEventListener('click', () => {
     soundEnabled = !soundEnabled;
     try { localStorage.setItem('meu-planner-som', soundEnabled ? 'on' : 'off'); } catch (_) {}
     updateSoundButton();
+    if (soundEnabled) playSound('toggle');
   });
-  document.addEventListener('click', event => {
-    if (!soundEnabled || !event.target.closest('button')) return;
+  function playSound(kind = 'click') {
+    if (!soundEnabled || soundLevel === 0) return;
     try {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if (!AudioContextClass) return;
       audioContext = audioContext || new AudioContextClass();
-      if (audioContext.state === 'suspended') audioContext.resume();
-      const oscillator = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      oscillator.type = 'sine'; oscillator.frequency.value = 620;
-      gain.gain.setValueAtTime(0.045, audioContext.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.07);
-      oscillator.connect(gain); gain.connect(audioContext.destination);
-      oscillator.start(); oscillator.stop(audioContext.currentTime + 0.07);
+      const startSound = () => {
+        const now = audioContext.currentTime;
+        const patterns = {
+          click: [[620, 0, .075, .55]], toggle: [[520, 0, .09, .55], [760, .075, .12, .65]],
+          open: [[520, 0, .09, .55], [690, .07, .12, .65]], save: [[590, 0, .08, .55], [790, .075, .1, .7], [980, .15, .14, .7]],
+          complete: [[523, 0, .1, .65], [659, .085, .1, .7], [784, .17, .18, .8]],
+          delete: [[480, 0, .11, .65], [360, .1, .16, .7]], navigate: [[600, 0, .08, .55], [740, .065, .1, .6]],
+          reminder: [[660, 0, .16, .75], [830, .14, .16, .8], [990, .28, .24, .85]]
+        };
+        (patterns[kind] || patterns.click).forEach(([frequency, offset, duration, strength]) => {
+          const oscillator = audioContext.createOscillator(); const gain = audioContext.createGain();
+          const when = now + offset; const peak = Math.min(.24, soundLevel / 100 * .21 * strength);
+          oscillator.type = kind === 'delete' ? 'triangle' : 'sine'; oscillator.frequency.setValueAtTime(frequency, when);
+          gain.gain.setValueAtTime(.0001, when); gain.gain.exponentialRampToValueAtTime(Math.max(.0001, peak), when + .012);
+          gain.gain.exponentialRampToValueAtTime(.0001, when + duration);
+          oscillator.connect(gain); gain.connect(audioContext.destination); oscillator.start(when); oscillator.stop(when + duration + .01);
+        });
+      };
+      if (audioContext.state === 'suspended') audioContext.resume().then(startSound).catch(() => {}); else startSound();
     } catch (_) {}
+  }
+  document.addEventListener('click', event => {
+    const button = event.target.closest('button'); if (!button) return;
+    if (button.id === 'soundToggle') return;
+    if (button.classList.contains('check')) playSound('complete');
+    else if (button.classList.contains('delete-action') || button.id === 'confirmDelete' || button.id === 'confirmClear') playSound('delete');
+    else if (button.id === 'addTask' || button.id === 'cancelTask') playSound('open');
+    else if (button.id === 'saveTaskButton' || button.id === 'saveReminder' || button.id === 'confirmRestore') playSound('save');
+    else if (button.id === 'prevWeek' || button.id === 'nextWeek' || button.classList.contains('day')) playSound('navigate');
+    else playSound('click');
   });
 
   const reminderTime = document.querySelector('#reminderTime');
@@ -350,6 +389,7 @@
   const disableReminderButton = document.querySelector('#disableReminder');
   let reminderTimer = null;
   function showReminder() {
+    playSound('reminder');
     reminderToast.classList.add('show');
     window.setTimeout(() => reminderToast.classList.remove('show'), 15000);
     try {
