@@ -109,6 +109,24 @@
           </div>
         </section>
 
+        <!-- Video card: user asked for video player -->
+        <section class="card video-card" id="videoCard">
+          <div class="panel-head">
+            <h2>Vídeo para assistir</h2>
+            <div class="panel-actions">
+              <button class="small-btn" id="addVideoBtn">Adicionar vídeo</button>
+            </div>
+          </div>
+          <div class="video-container">
+            <!-- Placeholder: if you have a file, put it in assets/demo.mp4 or change the src -->
+            <video id="studyVideo" controls poster="assets/video-poster.png" style="width:100%;border-radius:10px">
+              <source src="assets/demo.mp4" type="video/mp4">
+              Seu navegador não suporta vídeo.
+            </video>
+            <div class="video-note muted" style="margin-top:8px;font-size:0.9rem;color:var(--muted)">Se não houver vídeo, clique em "Adicionar vídeo" e selecione um arquivo .mp4 na pasta assets.</div>
+          </div>
+        </section>
+
         <section class="card assistant-card">
           <div class="panel-head">
             <h2>Assistente local</h2>
@@ -165,5 +183,21 @@
   </div>
 
   <script src="scripts/ui-enhancements.js"></script>
+  <script>
+    // quick handler to let user pick a video file and load it into the player
+    document.getElementById('addVideoBtn')?.addEventListener('click', ()=>{
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'video/mp4,video/webm';
+      input.onchange = ()=>{
+        const f = input.files[0];
+        if(!f) return alert('Nenhum arquivo selecionado');
+        const url = URL.createObjectURL(f);
+        const v = document.getElementById('studyVideo');
+        v.src = url; v.load(); v.play();
+      };
+      input.click();
+    });
+  </script>
 </body>
 </html>

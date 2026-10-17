@@ -1,4 +1,4 @@
-/* ui-enhancements.css - enhanced decorative theme */
+/* ui-enhancements.css - enhanced decorative theme with layout fixes */
 :root{--bg:#f4fbf7;--panel:#ffffff;--ink:#10241b;--muted:#5e7065;--line:#e6ece8;--green:#347a58;--green-soft:#eaf5ef;--accent:#77b78f;--shadow:0 14px 36px rgba(16,36,27,0.08);--radius:14px}
 *{box-sizing:border-box}
 html,body{height:100%}body{margin:0;font-family:Inter, system-ui, -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,var(--bg),#ffffff);color:var(--ink);-webkit-font-smoothing:antialiased}
@@ -13,7 +13,8 @@ html,body{height:100%}body{margin:0;font-family:Inter, system-ui, -apple-system,
 .mode-toggle select{padding:9px;border-radius:10px;border:1px solid var(--line);background:#fff}
 .top-buttons{display:flex;gap:8px}
 .avatar{width:40px;height:40px;border-radius:999px;background:linear-gradient(135deg,var(--green),#69a882);display:grid;place-items:center;color:#fff;font-weight:700}
-.layout{display:grid;grid-template-columns:1.7fr .95fr;gap:18px;padding:18px}
+/* layout: give main more room and side fixed width to avoid collapse */
+.layout{display:grid;grid-template-columns:1fr 360px;gap:18px;padding:18px}
 .card{background:var(--panel);border:1px solid rgba(0,0,0,0.03);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
 .decorated{background:linear-gradient(180deg,#fbfffdf0,#ffffff);border:1px solid rgba(52,122,88,0.04)}
 .hero{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:160px;padding:18px}
@@ -27,7 +28,7 @@ html,body{height:100%}body{margin:0;font-family:Inter, system-ui, -apple-system,
 .hero-visual img{width:240px;border-radius:10px}
 .panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .panel-head h2{margin:0;font-size:1.05rem}
-.panel-actions{display:flex;gap:8px}
+.panel-actions{display:flex;gap:8px;flex-wrap:wrap}
 .task-form{display:grid;grid-template-columns:1.4fr .8fr auto;gap:10px}
 .task-form input,.notes-area,.assistant-form input,select{width:100%;border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px}
 .task-list{display:flex;flex-direction:column;gap:10px}
@@ -54,9 +55,9 @@ html,body{height:100%}body{margin:0;font-family:Inter, system-ui, -apple-system,
 .footer{display:flex;justify-content:space-between;align-items:center;padding:12px;margin-top:14px;background:transparent}
 .footer a{color:var(--muted);text-decoration:none}
 .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
-@media (max-width:920px){.layout{grid-template-columns:1fr}.search-wrap input{width:160px}.hero-visual img{display:none}}
-
-/* Corrige sobreposição de botões no topo */
+.video-card .video-container{display:flex;flex-direction:column}
+.video-card video{width:100%;height:auto;border-radius:10px}
+/* Fix: top actions responsive */
 .top-actions{
   display: flex;
   align-items: center;
@@ -79,8 +80,13 @@ html,body{height:100%}body{margin:0;font-family:Inter, system-ui, -apple-system,
   white-space: nowrap; /* botão não quebra texto interno */
 }
 
+/* ensure panel-actions buttons never overlap */
+.panel-actions button, .panel-actions .small-btn{flex:0 1 auto;margin:0}
+
 /* ajuste para telas pequenas */
 @media (max-width:920px){
   .search-wrap{ flex-basis: 160px; }
   .top-actions{ gap:8px; }
+  .layout{grid-template-columns:1fr;}
+  .side-column{order:2}
 }
