@@ -107,18 +107,11 @@
   });
   volume.addEventListener('input', setVolume);
   const youtubeChoice = document.querySelector('#youtubeMusicChoice');
-  const youtubeFallback = document.querySelector('#youtubeMusicFallback');
-  const selectedYoutubeUrl = () => `https://www.youtube.com/watch?v=${youtubeChoice.value}`;
-  youtubeChoice?.addEventListener('change', () => {
-    if (youtubeFallback) youtubeFallback.href = selectedYoutubeUrl();
-  });
-  if (youtubeFallback && youtubeChoice) youtubeFallback.href = selectedYoutubeUrl();
   youtubeButton?.addEventListener('click', () => {
     if (!youtubePlayer || !youtubeChoice) return;
     const track = youtubeChoice.options[youtubeChoice.selectedIndex];
     if (location.protocol === 'file:') {
-      window.open(selectedYoutubeUrl(), '_blank', 'noopener,noreferrer');
-      status.textContent = 'O player incorporado não funciona em arquivo local. Abrimos o vídeo no YouTube.';
+      status.textContent = 'Para ouvir dentro do TarefaMix junto com o cronômetro, abra o site publicado em HTTPS. O player não funciona neste arquivo local.';
       return;
     }
     let frame = youtubePlayer.querySelector('iframe');
