@@ -1,62 +1,115 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TarefaMix — Organizador escolar</title>
-<link rel="stylesheet" href="styles/ui-enhancements.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TarefaMix — Organizador escolar</title>
+  <link rel="stylesheet" href="styles/ui-enhancements.css">
 </head>
 <body>
-  <div class="container">
-    <header class="header">
+  <div class="app-shell">
+    <header class="topbar">
       <div class="brand">
-        <img src="assets/logo.svg" alt="TarefaMix logo">
+        <div class="brand-mark">✳</div>
         <div>
-          <div class="title">TarefaMix</div>
-          <div class="subtitle">Organizador escolar — Modo local</div>
+          <div class="brand-name">TarefaMix</div>
+          <div class="brand-subtitle">Organizador escolar</div>
         </div>
       </div>
-      <div class="controls">
-        <button class="secondary-btn" onclick="location.reload()">Recarregar</button>
-        <button class="primary-btn" id="openHelp">Ajuda rápida</button>
+
+      <div class="top-actions">
+        <button class="ghost-button" id="reloadBtn" type="button">Recarregar</button>
+        <button class="ghost-button" id="exportCsvBtn" type="button">Exportar CSV</button>
+        <button class="ghost-button" id="exportJsonBtn" type="button">Backup (JSON)</button>
+        <button class="primary-button" id="helpBtn" type="button">Ajuda</button>
       </div>
     </header>
 
-    <div class="grid">
-      <section class="card">
-        <div class="hero">
-          <img src="assets/hero.svg" alt="Hero">
-          <div style="flex:1">
-            <div class="section-title"><h2>Organize suas tarefas</h2><div></div></div>
-            <form id="newTaskForm" style="display:flex;gap:8px;margin-bottom:12px">
-              <input class="input" name="title" placeholder="Nova tarefa (ex.: estudar matemática)" required>
-              <input class="input" name="due" type="date">
-              <button class="primary-btn" type="submit">Adicionar</button>
-            </form>
-            <div class="tasks-list card" id="tasksContainer" style="padding:12px"></div>
+    <main class="layout">
+      <section class="main-column">
+        <div class="hero card">
+          <div class="hero-copy">
+            <span class="eyebrow">Seu estudo em ordem</span>
+            <h1>Organize tarefas, foco e rotina com clareza.</h1>
+            <p>Sem IA externa. Sem custo. Tudo salvo no navegador e pronto para usar.</p>
+          </div>
+          <div class="hero-visual">
+            <div class="mini-card">
+              <span>Hoje</span>
+              <strong id="todayCount">0 tarefas</strong>
+            </div>
+            <div class="mini-card accent">
+              <span>Foco</span>
+              <strong>25 min</strong>
+            </div>
           </div>
         </div>
 
-        <div style="margin-top:16px" class="section-title"><h2>Timer Pomodoro</h2><div></div></div>
-        <div class="card" style="display:flex;align-items:center;justify-content:space-between">
-          <div class="timer"><div class="timer-display" id="timerDisplay">25:00</div></div>
-          <div style="display:flex;gap:8px"><button class="primary-btn" id="startTimer">Iniciar</button><button class="secondary-btn" id="resetTimer">Resetar</button></div>
-        </div>
+        <section class="panel card">
+          <div class="panel-head">
+            <h2>Nova tarefa</h2>
+          </div>
 
+          <form id="taskForm" class="task-form">
+            <input id="taskTitle" type="text" placeholder="Ex.: Estudar biologia" maxlength="120" required>
+            <input id="taskDue" type="date">
+            <button type="submit" class="primary-button">Adicionar</button>
+          </form>
+        </section>
+
+        <section class="panel card">
+          <div class="panel-head">
+            <h2>Minhas tarefas</h2>
+            <div>
+              <button class="small-btn" id="exportTasksCsv">Exportar tarefas CSV</button>
+            </div>
+          </div>
+          <div id="taskList" class="task-list" aria-live="polite"></div>
+        </section>
       </section>
 
-      <aside>
-        <div class="card">
-          <div class="section-title"><h2>Assistente de estudos</h2><div></div></div>
-          <div class="study-chat" id="studyChat">
-            <div class="chat-message assistant">Oi! Eu posso explicar frações, equações simples e fotossíntese. Pergunte algo.</div>
+      <aside class="side-column">
+        <section class="card">
+          <div class="panel-head">
+            <h2>Timer</h2>
           </div>
-          <form id="studyForm" class="chat-form">
-            <input id="studyInput" class="input" placeholder="Escreva uma pergunta de estudo..." required>
-            <button class="primary-btn">Perguntar</button>
-          </form>
-        </div>
 
-        <div class="card" style="margin-top:12px">
-          <div class="section-title"><h2>Anotações rápidas</h2><div></div></div>
-          <textarea class="textarea" style="height:120px;width:100%;" placeholder="Suas anotações..." onchange="localStorage.setItem('tm_notes_v1', this.value)">
+          <div class="timer-display" id="timerDisplay">25:00</div>
+
+          <div class="timer-actions">
+            <button type="button" class="primary-button" id="startTimer">Iniciar</button>
+            <button type="button" class="ghost-button" id="resetTimer">Resetar</button>
+          </div>
+        </section>
+
+        <section class="card assistant-card">
+          <div class="panel-head">
+            <h2>Assistente local</h2>
+          </div>
+
+          <div id="assistantChat" class="assistant-chat" aria-live="polite">
+            <div class="message bot">
+              Oi! Posso ajudar com frações, equações, fotossíntese e dicas de estudo.
+            </div>
+          </div>
+
+          <form id="assistantForm" class="assistant-form">
+            <input id="assistantInput" type="text" placeholder="Pergunte algo..." maxlength="180" required>
+            <button type="button" class="primary-button" id="assistantSend">Enviar</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <div class="panel-head">
+            <h2>Anotações</h2>
+          </div>
+
+          <textarea id="notesArea" class="notes-area" placeholder="Escreva suas ideias, lembretes e resumos..."></textarea>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <script src="scripts/ui-enhancements.js"></script>
+</body>
+</html>
