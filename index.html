@@ -1,23 +1,15 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#347a58"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>TarefaMix — Organizador escolar</title>
-<style>
-:root{--ink:#17221d;--muted:#75817a;--line:#e8ece8;--green:#347a58;--mint:#e7f2eb;--bg:#f7f9f7;--amber:#f8edcf;--rose:#fae6e2;--blue:#e5eef8}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Arial,sans-serif}.top,.brand,.site-footer,.card,.modal,.panel,.intro-card,.account-panel,.reminder-card,.task,.worker-area,.notes-card,.music-card,.focus-timer,.focus-controls,.study-chat,.chat-prompts,.day,.task-action,.auth-form,.main-app-shell{font-family:inherit}.button,.save,.secondary,.task-action,.auth-secondary,.intro-submit,.auth-reset,.google-signin,.reminder-button,.professional-action{font-family:inherit}.hidden{display:none!important}.app{max-width:1180px;margin:0 auto;padding:18px 18px 28px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 8px 12px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem;color:var(--ink)}.brand-mark{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,#347a58,#64a785);color:#fff;display:grid;place-items:center;font-size:1.35rem;box-shadow:0 10px 20px rgba(52,122,88,.2)}.top-right{display:flex;align-items:center;gap:12px}.user-profile{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--line);background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(23,34,29,.04)}
+</textarea>
+          <div style="margin-top:8px;display:flex;gap:8px"><button class="secondary-btn" onclick="(function(){const a=document.querySelector('.textarea');navigator.clipboard.writeText(a.value||'');alert('Copiado para a área de transferência');})()">Copiar</button><button class="secondary-btn" onclick="(function(){localStorage.removeItem('tm_notes_v1');document.querySelector('.textarea').value='';alert('Anotações limpas');})()">Limpar</button></div>
+        </div>
+      </aside>
+    </div>
 
-</style>
-<style>
-.site-footer{max-width:1100px;margin:0 auto;padding:20px 34px 32px;border-top:1px solid #e8ece8;display:flex;justify-content:space-between;align-items:center;gap:16px;color:#53635a;font-size:14px}.user-profile{border:0;background:transparent;font:inherit;color:inherit;cursor:pointer;padding:0}.user-profile:focus-visible{outline:3px solid #8ab79a;outline-offset:4px;border-radius:9px}.profile-dot{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#347a58,#5db08c);display:inline-block}.app-shell{max-width:1180px;margin:0 auto;padding:0 18px 30px}.brand-rail{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px 10px;margin:12px auto 0;max-width:1180px}.brand-rail .brand-chip{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid rgba(52,122,88,.14);background:rgba(255,255,255,.78);backdrop-filter:blur(8px);border-radius:14px;box-shadow:0 10px 25px rgba(22,35,29,.06)}.brand-rail .brand-dot{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,#347a58,#70b88d);display:grid;place-items:center;color:#fff;font-size:1.3rem;font-weight:700;box-shadow:0 10px 22px rgba(52,122,88,.22)}.brand-rail .brand-text strong{display:block;font-size:1.02rem}.brand-rail .brand-text span{display:block;font-size:.74rem;color:var(--muted)}.brand-rail .mini-stat{padding:8px 12px;border-radius:12px;background:#f3f7f3;border:1px solid var(--line);color:#2b563f;font-size:.8rem;font-weight:700}.brand-rail .mini-stat em{font-style:normal;color:var(--green);display:block}.premium-wrap{position:relative}.premium-wrap::before{content:"";position:absolute;inset:-18px 0 auto 0;height:140px;background:radial-gradient(circle at top left,#dfeee6,#f9fbf9 46%,#f7f9f7 100%);z-index:-1}.section-card, .card, .account-panel, .modal, .intro-card{border:1px solid rgba(21,31,27,.08);background:rgba(255,255,255,.9);box-shadow:0 10px 24px rgba(15,24,20,.04);border-radius:18px}.card{padding:18px}.top-card{background:linear-gradient(135deg,#effaf3,#f8fbf9);border:1px solid rgba(52,122,88,.12)}.app[data-mode="worker"] .brand-rail .mini-stat em{color:#3977ae} .logger-badge{padding:6px 10px;border-radius:999px;background:#edf5ef;border:1px solid var(--line);color:#2d5b46;font-size: .76rem;font-weight:700}.study-chat{background:linear-gradient(180deg,#f8faf8,#eef4ef);border:1px solid rgba(52,122,88,.14)}.chat-message.assistant{background:#fff;border:1px solid rgba(52,122,88,.08)}.chat-message.user{background:#eaf7ef;border:1px solid rgba(52,122,88,.12)}.video-bot .bot-button, .intro-submit, .save, .reminder-button, .secondary, .task-action, .auth-secondary, .google-signin{transition:transform .18s ease, box-shadow .18s ease, background .18s ease}.video-bot .bot-button:hover, .intro-submit:hover, .save:hover, .reminder-button:hover, .secondary:hover, .task-action:hover, .auth-secondary:hover, .google-signin:hover{transform:translateY(-1px)}
-</style>
-</head>
-<body>
-<div class="brand-rail">
-  <div class="brand-chip">
-    <div class="brand-dot">✳</div>
-    <div class="brand-text"><strong>TarefaMix</strong><span>Organizador escolar</span></div>
+    <div class="footer">TarefaMix — privado, local e sem IA externa · Feito para estudos</div>
   </div>
-  <div class="mini-stat"><em>Local</em> Sem IA externa</div>
-</div>
-<div class="app-shell">
-<main class="app" data-mode="student">
+
+<script src="scripts/ui-enhancements.js"></script>
+<script>
+// hydrate notes
+try{document.querySelector('.textarea').value = localStorage.getItem('tm_notes_v1') || ''}catch(_){}</script>
+</body>
+</html>
