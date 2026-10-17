@@ -20,25 +20,46 @@
 .role-question{margin:18px 0 8px;text-align:left;font-size:13px;font-weight:700}.role-picker{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px}.role-choice{display:grid;gap:3px;padding:12px;border:1.5px solid var(--line);border-radius:12px;background:#fff;text-align:left;cursor:pointer}.role-choice[aria-pressed="true"]{border-color:var(--green);background:#f0f7f2;box-shadow:0 0 0 2px #347a5814}.role-choice strong{font-size:13px;color:var(--ink)}.role-choice span{font-size:11px;color:var(--muted)}.app[data-mode="worker"] [data-mode="student"]{display:none!important}.app:not([data-mode="worker"]) [data-mode="worker"]{display:none!important}@media(max-width:420px){.role-picker{grid-template-columns:1fr}}
 .app[data-mode="worker"] #addTask{display:none!important}
 .app{animation:appArrive .65s cubic-bezier(.2,.75,.25,1) both}.card{transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}.card:hover{transform:translateY(-2px);box-shadow:0 12px 30px #203b2a0c;border-color:#d8e5db}.task{transition:transform .2s ease,box-shadow .2s ease,background .2s ease}.task:hover{transform:translateX(3px);box-shadow:0 5px 16px #203b2a12}.task.task-done{background:#f5faf6}.check{transition:transform .18s ease,background .18s ease}.check:active{transform:scale(.86)}button{transition:transform .16s ease,filter .16s ease,box-shadow .16s ease}button:hover{filter:brightness(1.04)}button:active{transform:scale(.96)}.week-nav button:hover,.task-action:hover,.sound-toggle:hover{transform:translateY(-2px);box-shadow:0 4px 12px #203b2a12}.task{animation:taskEnter .32s cubic-bezier(.2,.7,.25,1) both}.task:nth-child(2){animation-delay:.035s}.task:nth-child(3){animation-delay:.07s}.task:nth-child(4){animation-delay:.105s}.day{animation:dayPop .28s cubic-bezier(.2,.7,.25,1) both}.day:nth-child(2){animation-delay:.025s}.day:nth-child(3){animation-delay:.05s}.day:nth-child(4){animation-delay:.075s}.day:nth-child(5){animation-delay:.1s}.day:nth-child(6){animation-delay:.125s}.day:nth-child(7){animation-delay:.15s}.event{animation:eventIn .3s ease both}.modal-backdrop.open .modal{animation:modalIn .24s cubic-bezier(.2,.75,.25,1) both}.reminder-toast.show{animation:toastIn .4s cubic-bezier(.16,1,.3,1) both}.sound-control{margin-right:10px}.sound-settings{width:138px;padding:0;background:transparent;border:0;border-radius:10px;box-shadow:none}.sound-settings[open]{width:230px}.sound-settings summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:8px 10px;background:white;border:1px solid var(--line);border-radius:9px;color:var(--ink);font-size:12px;font-weight:700;white-space:nowrap}.sound-settings summary::-webkit-details-marker{display:none}.sound-panel{display:grid;gap:8px;width:230px;margin-top:8px;padding:13px;background:white;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 22px #17221d12}.sound-panel-title{font-size:12px;color:var(--green)}.sound-panel .sound-toggle{justify-self:start;margin:0;padding:7px 9px}.sound-settings label{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700}.sound-settings input{width:100%;accent-color:var(--green)}.sound-settings output{min-width:34px;color:var(--green);text-align:right}.sound-settings[open] .sound-panel{animation:soundPanelIn .24s cubic-bezier(.2,.75,.25,1) both}.user-profile{display:flex;align-items:center;gap:8px;margin-right:5px;min-width:0}.user-avatar{width:38px;height:38px;flex:none;display:grid;place-items:center;border:2px solid #dcebe0;border-radius:50%;background:linear-gradient(145deg,#438b64,#286747);box-shadow:0 2px 6px #203b2a18;color:#fff;font-size:12px;font-weight:800;letter-spacing:.2px}.user-profile-name{max-width:115px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink);font-size:13px;font-weight:700}@media(max-width:560px){.user-profile{gap:6px}.user-avatar{width:34px;height:34px}.user-profile-name{max-width:85px}}@keyframes soundPanelIn{from{opacity:0;transform:translateY(-7px) scale(.97);transform-origin:top right}to{opacity:1;transform:translateY(0) scale(1);transform-origin:top right}}@keyframes appArrive{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes taskEnter{from{opacity:0;transform:translateY(9px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes dayPop{from{opacity:0;transform:translateY(5px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes eventIn{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}@keyframes modalIn{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes toastIn{0%{opacity:0;transform:translateY(25px) scale(.94)}70%{opacity:1;transform:translateY(-3px) scale(1.01)}100%{opacity:1;transform:translateY(0) scale(1)}}@media(prefers-reduced-motion:reduce){.app,.task,.day,.event,.modal-backdrop.open .modal,.reminder-toast.show,.sound-settings[open] .sound-panel{animation:none!important}.card,button,.task,.check{transition:none!important}.card:hover,.task:hover,button:active,button:hover{transform:none!important}}
-.user-profile{border:0;background:transparent;font:inherit;color:inherit;cursor:pointer;padding:0}.user-profile:focus-visible{outline:3px solid #8ab79a;outline-offset:4px;border-radius:9px}.profession-suggestions{display:none;position:relative;z-index:5;max-height:220px;overflow:auto;border:1px solid var(--line);border-radius:9px;background:#fff;box-shadow:0 8px 22px #17221d18}.profession-suggestions.open{display:grid}.profession-suggestion{display:flex;justify-content:space-between;gap:10px;width:100%;padding:9px 10px;border:0;border-bottom:1px solid var(--line);background:white;text-align:left;color:var(--ink);font:inherit;font-size:12px;cursor:pointer}.profession-suggestion:last-child{border-bottom:0}.profession-suggestion:hover,.profession-suggestion:focus{background:var(--mint)}.profession-code{flex:none;color:var(--muted);font-size:11px}.sheet-tools{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:10px 0}.sheet-tools label{display:grid;gap:5px;max-width:360px;width:100%;font-size:12px;font-weight:700;color:#53635a}.sheet-tools input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-weight:400}.sheet-summary{font-size:12px;color:var(--muted);white-space:nowrap}.work-sheet{min-width:1100px}.work-sheet td:nth-child(1){min-width:180px}.work-sheet td:nth-child(2){min-width:140px}.work-sheet td:nth-child(6){min-width:180px}@media(max-width:720px){.sheet-tools{align-items:flex-start;flex-direction:column}.sheet-tools label{max-width:none}}.sheet-share{margin:10px 0;padding:14px;border:1px solid #dcebe0;border-radius:12px;background:#f7faf7}.sheet-share.hidden{display:none}.sheet-share>strong{display:block;color:var(--green);font-size:14px}.sheet-share>p{margin:5px 0 10px;color:var(--muted);font-size:12px}.sheet-share label{display:grid;gap:5px;max-width:420px;font-size:12px;font-weight:700}.sheet-share input{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;font:inherit}.share-suggestions{display:none;max-width:420px;margin-top:4px;border:1px solid var(--line);border-radius:9px;background:#fff;overflow:hidden}.share-suggestions.open{display:grid}.share-contact-option{padding:9px 10px;border:0;border-bottom:1px solid var(--line);background:white;text-align:left;font:inherit;cursor:pointer}.share-contact-option:hover{background:var(--mint)}.share-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.share-actions button{border:0;border-radius:9px;background:var(--green);color:#fff;padding:9px 12px;font-weight:700;cursor:pointer}.share-actions .secondary{border:1px solid var(--line);background:#fff;color:var(--ink)}.share-status{min-height:18px!important;margin-bottom:0!important;color:var(--green)!important}.install-app{border:0;border-radius:9px;background:var(--green);color:#fff;padding:8px 11px;font:700 12px Arial,sans-serif;cursor:pointer;margin-right:10px}.install-app[hidden]{display:none!important}@media(max-width:600px){.top-right{flex-wrap:wrap;justify-content:flex-end;gap:6px}.install-app{margin-right:0}}.install-hint{max-width:260px;color:var(--muted);font-size:11px}</style></head><body><div class="intro" id="introScreen">
+.user-profile{border:0;background:transparent;font:inherit;color:inherit;cursor:pointer;padding:0}.user-profile:focus-visible{outline:3px solid #8ab79a;outline-offset:4px;border-radius:9px}.profession-suggestions{display:none;position:relative;z-index:5;max-height:220px;overflow:auto;border:1px solid var(--line);border-radius:9px;background:#fff;box-shadow:0 8px 22px #17221d18}.profession-suggestions.open{display:grid}.profession-suggestion{display:flex;justify-content:space-between;gap:10px;width:100%;padding:9px 10px;border:0;border-bottom:1px solid var(--line);background:white;text-align:left;color:var(--ink);font:inherit;font-size:12px;cursor:pointer}.profession-suggestion:last-child{border-bottom:0}.profession-suggestion:hover,.profession-suggestion:focus{background:var(--mint)}.profession-code{flex:none;color:var(--muted);font-size:11px}.sheet-tools{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:10px 0}.sheet-tools label{display:grid;gap:5px;max-width:360px;width:100%;font-size:12px;font-weight:700;color:#53635a}.sheet-tools input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-weight:400}.sheet-summary{font-size:12px;color:var(--muted);white-space:nowrap}.work-sheet{min-width:1100px}.work-sheet td:nth-child(1){min-width:180px}.work-sheet td:nth-child(2){min-width:140px}.work-sheet td:nth-child(6){min-width:180px}@media(max-width:720px){.sheet-tools{align-items:flex-start;flex-direction:column}.sheet-tools label{max-width:none}}.sheet-share{margin:10px 0;padding:14px;border:1px solid #dcebe0;border-radius:12px;background:#f7faf7}.sheet-share.hidden{display:none}.sheet-share>strong{display:block;color:var(--green);font-size:14px}.sheet-share>p{margin:5px 0 10px;color:var(--muted);font-size:12px}.sheet-share label{display:grid;gap:5px;max-width:420px;font-size:12px;font-weight:700}.sheet-share input{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;font:inherit}.share-suggestions{display:none;max-width:420px;margin-top:4px;border:1px solid var(--line);border-radius:9px;background:#fff;overflow:hidden}.share-suggestions.open{display:grid}.share-contact-option{padding:9px 10px;border:0;border-bottom:1px solid var(--line);background:white;text-align:left;font:inherit;cursor:pointer}.share-contact-option:hover{background:var(--mint)}.share-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.share-actions button{border:0;border-radius:9px;background:var(--green);color:#fff;padding:9px 12px;font-weight:700;cursor:pointer}.share-actions .secondary{border:1px solid var(--line);background:#fff;color:var(--ink)}.share-status{min-height:18px!important;margin-bottom:0!important;color:var(--green)!important}.install-app{border:0;border-radius:9px;background:var(--green);color:#fff;padding:8px 11px;font:700 12px Arial,sans-serif;cursor:pointer;margin-right:10px}.install-app[hidden]{display:none!important}@media(max-width:600px){.top-right{flex-wrap:wrap;justify-content:flex-end;gap:6px}.install-app{margin-right:0}}.install-hint{max-width:260px;color:var(--muted);font-size:11px}.account-panel{text-align:left;margin-top:16px}.account-panel h2{font-size:20px;margin:0 0 5px;text-align:center}.account-description{text-align:center;font-size:13px}.auth-form{display:grid;gap:11px;margin-top:16px}.auth-form label{display:grid;gap:6px;font-size:13px;font-weight:700}.auth-form input{width:100%;padding:12px;border:1px solid #dce4dd;border-radius:9px;font:inherit}.auth-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.auth-actions .intro-submit{margin-top:0}.auth-secondary,.google-signin{border:1px solid #dce4dd;border-radius:10px;padding:12px;background:white;color:#17221d;font:700 14px Arial,sans-serif;cursor:pointer}.auth-divider{display:flex;align-items:center;gap:10px;color:#75817a;font-size:12px;margin:14px 0}.auth-divider:before,.auth-divider:after{content:"";height:1px;background:#e4ebe5;flex:1}.google-signin{width:100%;display:flex;justify-content:center;align-items:center;gap:9px}.google-signin span{font-weight:700;color:#4285f4;font-size:17px}.auth-reset{display:block;margin:10px auto 0;border:0;background:none;color:#347a58;font-weight:700;cursor:pointer;padding:6px}.auth-status{min-height:18px;margin:8px 0!important;text-align:center;font-size:12px;color:#347a58}.auth-status.error{color:#a94d42}.account-panel[hidden],#profileSetup[hidden]{display:none!important}.signout-button{border:1px solid var(--line);border-radius:8px;background:white;padding:7px 9px;color:var(--ink);font-weight:700;font-size:11px;cursor:pointer}.signout-button[hidden]{display:none!important}@media(max-width:480px){.intro-card{padding:24px}.auth-actions{grid-template-columns:1fr}}.focus-card{margin-top:18px;background:linear-gradient(120deg,#fff 68%,#eff7f0)}.focus-timer{display:grid;place-items:center;gap:4px;margin:14px 0;padding:18px 14px;border-radius:16px;background:#f1f7f2}.focus-phase{color:var(--muted);font-size:13px;font-weight:700}.focus-clock{color:var(--green);font-size:clamp(3rem,12vw,4.4rem);font-weight:800;line-height:1.1;letter-spacing:.04em;font-variant-numeric:tabular-nums}.focus-controls{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}.focus-controls select{min-height:40px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit}.focus-controls button{min-height:40px;padding:9px 12px;border-radius:9px;font-weight:700;cursor:pointer}.focus-start{border:0;background:var(--green);color:#fff}.focus-controls button:disabled{opacity:.55;cursor:not-allowed}.focus-status{min-height:18px;margin:12px 0 0;text-align:center;color:var(--muted);font-size:12px}.games-shortcut{margin:0 0 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;background:linear-gradient(110deg,#fff 55%,#edf6ef)}.games-shortcut h2{font-size:16px;margin:0 0 4px}.games-link{flex:none;padding:10px 14px;border-radius:10px;background:var(--green);color:#fff;text-decoration:none;font-weight:700;font-size:13px}.games-link:hover{background:#286647}.games-link:focus-visible{outline:3px solid #9bc8a8;outline-offset:3px}@media(max-width:480px){.games-shortcut{align-items:flex-start;flex-direction:column}}</style></head><body><div class="intro" id="introScreen">
  <section class="intro-card">
   <div class="intro-mark">✳</div>
   <div class="eyebrow" id="introEyebrow">Organize seus estudos</div>
   <h1>Bem-vindo ao <span style="color:#347a58">TarefaMix!</span></h1>
-  <p id="introDescription">Seu cantinho para deixar as tarefas em ordem.</p>
-  <div class="role-question">Como você vai usar o TarefaMix?</div>
-  <div class="role-picker" role="group" aria-label="Escolha seu perfil"><button type="button" class="role-choice" data-role="student" aria-pressed="true"><strong>📚 Estudando</strong><span>Tarefas e matérias da escola</span></button><button type="button" class="role-choice" data-role="worker" aria-pressed="false"><strong>💼 Trabalhando</strong><span>Atividades e planilha de trabalho</span></button></div>
-  <div class="welcome-line" id="welcomeLine">Qual seu nome?</div>
-  <form class="intro-form" id="welcomeForm">
-   <label>Seu nome<input id="yourName" name="name" autocomplete="given-name" required maxlength="50" placeholder="Como podemos te chamar?"></label>
-
-
-   <button class="intro-submit" type="submit">Entrar no organizador</button>
-  </form>
-  <p class="intro-note">Esta demonstração só pede seu nome; não precisa de e-mail nem senha.</p>
+  <p id="introDescription">Seu cantinho para deixar as tarefas em ordem.</p><button class="intro-games-button" id="openEducationalGamesIntro" type="button"><span class="intro-games-icon" aria-hidden="true">🎮</span><span><strong>JOGOS EDUCATIVOS</strong><small>Escolha sua série e aprenda jogando</small></span><span class="intro-games-arrow" aria-hidden="true">→</span></button>
+  <section class="account-panel" id="authPanel" aria-labelledby="accountTitle">
+   <h2 id="accountTitle">Entre ou crie sua conta</h2>
+   <p class="account-description">Use uma conta Google ou seu e-mail e senha.</p>
+   <form id="authEmailForm" class="auth-form">
+    <label for="authEmail">E-mail<input id="authEmail" type="email" autocomplete="email" required maxlength="254" placeholder="voce@gmail.com"></label>
+    <label for="authPassword">Senha<input id="authPassword" type="password" autocomplete="current-password" required minlength="8" placeholder="Pelo menos 8 caracteres"></label>
+    <div class="auth-actions"><button class="intro-submit" type="submit" data-action="login">Entrar</button><button class="auth-secondary" type="button" id="createAccount">Criar conta</button></div>
+   </form>
+   <div class="auth-divider"><span>ou</span></div>
+   <button class="google-signin" id="googleSignIn" type="button"><span aria-hidden="true">G</span> Continuar com Google</button>
+   <button class="auth-reset" id="resetPassword" type="button">Esqueci minha senha</button>
+   <p class="auth-status" id="authStatus" role="status" aria-live="polite"></p>
+   <p class="intro-note">Seu e-mail serve para entrar. Suas tarefas continuam salvas neste aparelho; a conta ainda não sincroniza tarefas entre aparelhos.</p>
+  </section>
+  <section class="account-panel" id="passwordRecoveryPanel" hidden>
+   <h2>Defina uma nova senha</h2>
+   <p class="account-description">Escolha uma senha nova para sua conta.</p>
+   <form id="updatePasswordForm" class="auth-form"><label for="newPassword">Nova senha<input id="newPassword" type="password" required minlength="8" autocomplete="new-password"></label><button class="intro-submit" type="submit">Salvar nova senha</button></form>
+   <p class="auth-status" id="passwordStatus" role="status" aria-live="polite"></p>
+  </section>
+  <section id="profileSetup" hidden>
+   <div class="role-question">Como você vai usar o TarefaMix?</div>
+   <div class="role-picker" role="group" aria-label="Escolha seu perfil"><button type="button" class="role-choice" data-role="student" aria-pressed="true"><strong>📚 Estudando</strong><span>Tarefas e matérias da escola</span></button><button type="button" class="role-choice" data-role="worker" aria-pressed="false"><strong>💼 Trabalhando</strong><span>Atividades e planilha de trabalho</span></button></div>
+   <div class="welcome-line" id="welcomeLine">Qual seu nome?</div>
+   <form class="intro-form" id="welcomeForm">
+    <label>Seu nome<input id="yourName" name="name" autocomplete="given-name" required maxlength="50" placeholder="Como podemos te chamar?"></label>
+    <button class="intro-submit" type="submit">Continuar para o organizador</button>
+   </form>
+   <p class="intro-note">Sua conta foi autenticada. O TarefaMix guarda os dados no aparelho por enquanto.</p>
+  </section>
  </section>
 </div>
-<main class="app" data-mode="student"><header class="top"><div class="brand">✳ <b>TarefaMix</b></div><div class="top-right"><button class="user-profile" id="editProfile" type="button" aria-label="Editar nome e perfil" title="Editar nome e perfil"><span class="user-avatar" id="userAvatar">👤</span><span class="user-profile-name" id="userDisplayName">Visitante</span></button><div class="sound-control"><details class="sound-settings"><summary aria-label="Abrir efeitos sonoros">🔊 SFX</summary><div class="sound-panel"><strong class="sound-panel-title">Efeitos sonoros</strong><button class="sound-toggle" id="soundToggle" type="button" title="Ligar ou desligar sons" aria-pressed="true">🔊 Som ligado</button><label for="soundVolume">Volume <input id="soundVolume" type="range" min="0" max="100" value="75"><output id="soundVolumeValue" for="soundVolume">75%</output></label></div></details></div><button class="install-app" id="installApp" type="button">⬇ Instalar app</button><span class="install-hint" id="installHint" role="status" hidden></span><div class="date" id="todayDate"></div></div></header><section class="greeting"><div><div class="eyebrow" id="greetingEyebrow">Seu espaço de estudos</div><h1 id="greetingTitle">Oi! Bora organizar? 👋</h1><p class="sub" id="greetingSubtitle">Um passo de cada vez. Você consegue.</p></div><button class="add" id="addTask">＋ Nova tarefa</button></section><div class="grid" data-mode="student"><section class="card"><div class="cardhead"><h2>Minhas tarefas</h2><div class="task-tools"><span class="small" id="taskCount">3 tarefas</span><button class="clear-tasks" id="clearTasks" type="button">Limpar tarefas</button></div></div><div class="task-filters">
+<main class="app" data-mode="student"><header class="top"><div class="brand">✳ <b>TarefaMix</b></div><div class="top-right"><button class="user-profile" id="editProfile" type="button" aria-label="Editar nome e perfil" title="Editar nome e perfil"><span class="user-avatar" id="userAvatar">👤</span><span class="user-profile-name" id="userDisplayName">Visitante</span></button><button class="signout-button" id="signOutAccount" type="button" hidden>Sair</button><div class="sound-control"><details class="sound-settings"><summary aria-label="Abrir efeitos sonoros">🔊 SFX</summary><div class="sound-panel"><strong class="sound-panel-title">Efeitos sonoros</strong><button class="sound-toggle" id="soundToggle" type="button" title="Ligar ou desligar sons" aria-pressed="true">🔊 Som ligado</button><label for="soundVolume">Volume <input id="soundVolume" type="range" min="0" max="100" value="75"><output id="soundVolumeValue" for="soundVolume">75%</output></label></div></details></div><button class="install-app" id="installApp" type="button">⬇ Instalar app</button><span class="install-hint" id="installHint" role="status" hidden></span><div class="date" id="todayDate"></div></div></header><section class="greeting"><div><div class="eyebrow" id="greetingEyebrow">Seu espaço de estudos</div><h1 id="greetingTitle">Oi! Bora organizar? 👋</h1><p class="sub" id="greetingSubtitle">Um passo de cada vez. Você consegue.</p></div><button class="add" id="addTask">＋ Nova tarefa</button></section><section class="card games-shortcut" data-mode="student" aria-labelledby="gamesTitle"><div><h2 id="gamesTitle">🎮 Jogos educativos</h2><p class="sub">Quiz de várias matérias com dificuldade ajustada para você.</p></div><button class="games-link" id="openEducationalGames" type="button">Começar jogo <span aria-hidden="true">→</span></button></section>
+<section class="card educational-games" id="educationalGames" data-mode="student" aria-labelledby="educationalGamesTitle" hidden><div class="cardhead"><h2 id="educationalGamesTitle">🎯 Vamos montar seu jogo?</h2><button class="game-close" id="closeEducationalGames" type="button" aria-label="Fechar jogos educativos">Fechar</button></div><p class="sub games-intro">Responda três perguntas e vamos escolher um nível para começar.</p><form class="games-setup" id="gamesSetupForm"><label for="gamesGrade">Qual é sua série na escola?<select id="gamesGrade" required><option value="" selected disabled>Selecione sua série</option><option value="1">1º ano do Ensino Fundamental</option><option value="2">2º ano do Ensino Fundamental</option><option value="3">3º ano do Ensino Fundamental</option><option value="4">4º ano do Ensino Fundamental</option><option value="5">5º ano do Ensino Fundamental</option><option value="6">6º ano do Ensino Fundamental</option><option value="7">7º ano do Ensino Fundamental</option><option value="8">8º ano do Ensino Fundamental</option><option value="9">9º ano do Ensino Fundamental</option><option value="10">1º ano do Ensino Médio</option><option value="11">2º ano do Ensino Médio</option><option value="12">3º ano do Ensino Médio</option></select></label><label for="gamesSubject">Qual matéria quer jogar?<select id="gamesSubject" required><option value="" selected disabled>Selecione a matéria</option><option value="math">Matemática</option><option value="portuguese">Português</option><option value="science">Ciências</option><option value="history">História</option><option value="geography">Geografia</option><option value="english">Inglês</option></select></label><label for="gamesKnowledge">Quanto você já sabe dessa matéria?<select id="gamesKnowledge" required><option value="low">Estou começando</option><option value="some" selected>Sei um pouco</option><option value="high">Sei bastante</option></select></label><button class="games-start" type="submit">Montar meu jogo</button></form><div class="games-play" id="gamesPlay" hidden><span class="games-level" id="gamesDifficulty">Nível inicial</span><p class="games-level-note" id="gamesLevelNote"></p><div class="games-meta"><span id="gamesTopicName">Matemática</span><span id="gamesProgress">Pergunta 1 de 5</span><span id="gamesScore">⭐ 0 pontos</span></div><h3 class="games-question" id="gamesQuestion"></h3><div class="games-answers" id="gamesAnswers"></div><p class="games-feedback" id="gamesFeedback" role="status" aria-live="polite"></p><button class="games-start games-next" id="gamesNext" type="button" hidden>Próxima pergunta</button></div><div class="games-result" id="gamesResult" hidden><div class="games-result-emoji">🌟</div><h3>Rodada concluída!</h3><p id="gamesResultScore" class="games-result-score"></p><p id="gamesResultCopy"></p><p id="gamesBest" class="small"></p><button class="games-start" id="gamesPlayAgain" type="button">Escolher outra rodada</button></div><p id="gamesLive" class="games-sr-only" role="status" aria-live="polite"></p></section><div class="grid" data-mode="student"><section class="card"><div class="cardhead"><h2>Minhas tarefas</h2><div class="task-tools"><span class="small" id="taskCount">3 tarefas</span><button class="clear-tasks" id="clearTasks" type="button">Limpar tarefas</button></div></div><div class="task-filters">
  <label class="small">Matéria<select id="subjectFilter"><option value="">Todas as matérias</option></select></label>
  <label class="small">Status<select id="statusFilter"><option value="">Todas</option><option value="pending">Pendentes</option><option value="done">Concluídas</option></select></label>
  <label class="small">Prazo<select id="dueFilter"><option value="">Qualquer prazo</option><option value="dated">Com data</option><option value="undated">Sem data</option></select></label>
@@ -66,7 +87,13 @@
  <div class="reminder-form"><label for="reminderTime" class="small">Horário:</label><input type="time" id="reminderTime" value="18:00"><button class="reminder-button" id="saveReminder" type="button">Ativar lembrete</button><button class="secondary" id="disableReminder" type="button" style="display:none">Desativar</button></div>
  <div class="reminder-status" id="reminderStatus">O lembrete toca enquanto esta página estiver aberta.</div>
 </section>
-<section class="card video-bot" data-mode="student">
+<section class="card focus-card" aria-labelledby="focusTitle">
+ <div class="cardhead"><h2 id="focusTitle">⏱️ Tempo de foco</h2><span class="small">Estudos e trabalho</span></div>
+ <p class="sub">Faça uma atividade por vez. O timer funciona enquanto esta página estiver aberta.</p>
+ <div class="focus-timer"><span class="focus-phase" id="focusPhase">Foco</span><output class="focus-clock" id="focusClock" role="timer" aria-live="off">25:00</output></div>
+ <div class="focus-controls"><label class="small" for="focusDuration">Duração:</label><select id="focusDuration" aria-label="Escolher duração do timer"><option value="25" data-phase="Foco">Foco · 25 min</option><option value="50" data-phase="Foco">Foco · 50 min</option><option value="5" data-phase="Pausa">Pausa · 5 min</option><option value="15" data-phase="Pausa">Pausa · 15 min</option></select><button class="focus-start" id="startFocus" type="button">Começar</button><button class="secondary" id="pauseFocus" type="button" disabled>Pausar</button><button class="secondary" id="resetFocus" type="button">Reiniciar</button></div>
+ <p class="focus-status" id="focusStatus" role="status" aria-live="polite">Escolha um tempo e comece quando quiser.</p>
+</section><section class="card video-bot" data-mode="student">
  <div class="cardhead"><h2>🤖 Assistente de estudos</h2><span class="small">Ajuda rápida</span></div>
  <div class="study-chat" id="studyChat" role="log" aria-live="polite" aria-label="Conversa com o assistente"><div class="chat-message assistant">Oi! Eu posso explicar alguns assuntos e procurar vídeos para você. Sobre o que quer estudar?</div></div>
  <form class="bot-form" id="videoBotForm"><input class="bot-input" id="subjectSearch" maxlength="180" required placeholder="Escreva uma pergunta ou matéria..." aria-label="Sua pergunta"><button class="bot-button" type="submit">Enviar</button></form>
@@ -107,10 +134,10 @@
 <div class="modal-backdrop" id="deleteModal" role="dialog" aria-modal="true" aria-labelledby="deleteTitle">
  <section class="modal"><h2 id="deleteTitle">Apagar esta tarefa?</h2><p class="delete-copy" id="deleteCopy"></p><div class="modal-actions"><button type="button" class="secondary" id="cancelDelete">Cancelar</button><button type="button" class="yes-clear" id="confirmDelete">Apagar tarefa</button></div></section>
 </div>
-<section class="card plus-card" id="plusPackage" aria-labelledby="plusTitle"><div class="cardhead"><h2 id="plusTitle">✨ TarefaMix Plus</h2><span class="plus-label">Kit digital</span></div><p class="sub">Um kit digital de 6 páginas para imprimir e usar no dia a dia.</p><ul class="plus-items"><li>Planejador semanal com espaço para tarefas e prioridades.</li><li>Plano de estudos dividido em etapas, com espaço para revisão.</li><li>Agenda diária com horários e prioridades.</li><li>Acompanhador de hábitos para 30 dias.</li><li>Planejador de metas e projetos em pequenos passos.</li><li>Organizador de atividades e compromissos.</li></ul><div class="plus-note" role="status">O pagamento é feito pelo Pix do Nubank. Depois, envie o comprovante por e-mail. Sua mãe confirma o pagamento e envia o kit manualmente.</div><a class="plus-buy" href="https://nubank.com.br/cobrar/62flwe/6ad2a5d3-0ea6-463e-9932-ec4c500f1af4" target="_blank" rel="noopener noreferrer">Pagar R$ 4 pelo Pix</a><p class="plus-contact">Envie o comprovante para <a href="mailto:flavianadiassoares@gmail.com?subject=Comprovante%20TarefaMix%20Plus">o contato do TarefaMix Plus</a>.</p></section></main><style>.plus-card{margin-top:18px;border-color:#d9d0ee;background:linear-gradient(145deg,#fff,#faf8ff)}.plus-label{border-radius:20px;background:#eee8fa;color:#61479a;padding:5px 10px;font-size:11px;font-weight:700}.plus-items{display:grid;gap:8px;margin:14px 0;padding-left:22px;color:#435149;font-size:14px}.plus-note{padding:11px 13px;border-radius:10px;background:#f4f1fa;color:#60547b;font-size:12px}.plus-buy{display:inline-block;margin-top:12px;padding:10px 14px;border:0;border-radius:9px;background:#7654b7;color:white;font-weight:700;text-decoration:none}.plus-buy:hover{background:#63429f}.plus-contact{margin:10px 0 0;color:#60547b;font-size:12px}.plus-contact a{color:#60409e;font-weight:700}</style>
+</main>
 <style>
 .site-footer{max-width:1100px;margin:0 auto;padding:20px 34px 32px;border-top:1px solid #e8ece8;display:flex;justify-content:space-between;align-items:center;gap:16px;color:#53635a;font-size:14px}.site-footer p{margin:4px 0}.site-footer a{color:#347a58;font-weight:700}.site-footer .footer-name{font-weight:700;color:#17221d}@media(max-width:720px){.site-footer{padding:18px 16px 28px;align-items:flex-start;flex-direction:column}}
-.user-profile{border:0;background:transparent;font:inherit;color:inherit;cursor:pointer;padding:0}.user-profile:focus-visible{outline:3px solid #8ab79a;outline-offset:4px;border-radius:9px}.profession-suggestions{display:none;position:relative;z-index:5;max-height:220px;overflow:auto;border:1px solid var(--line);border-radius:9px;background:#fff;box-shadow:0 8px 22px #17221d18}.profession-suggestions.open{display:grid}.profession-suggestion{display:flex;justify-content:space-between;gap:10px;width:100%;padding:9px 10px;border:0;border-bottom:1px solid var(--line);background:white;text-align:left;color:var(--ink);font:inherit;font-size:12px;cursor:pointer}.profession-suggestion:last-child{border-bottom:0}.profession-suggestion:hover,.profession-suggestion:focus{background:var(--mint)}.profession-code{flex:none;color:var(--muted);font-size:11px}.sheet-tools{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:10px 0}.sheet-tools label{display:grid;gap:5px;max-width:360px;width:100%;font-size:12px;font-weight:700;color:#53635a}.sheet-tools input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-weight:400}.sheet-summary{font-size:12px;color:var(--muted);white-space:nowrap}.work-sheet{min-width:1100px}.work-sheet td:nth-child(1){min-width:180px}.work-sheet td:nth-child(2){min-width:140px}.work-sheet td:nth-child(6){min-width:180px}@media(max-width:720px){.sheet-tools{align-items:flex-start;flex-direction:column}.sheet-tools label{max-width:none}}.sheet-share{margin:10px 0;padding:14px;border:1px solid #dcebe0;border-radius:12px;background:#f7faf7}.sheet-share.hidden{display:none}.sheet-share>strong{display:block;color:var(--green);font-size:14px}.sheet-share>p{margin:5px 0 10px;color:var(--muted);font-size:12px}.sheet-share label{display:grid;gap:5px;max-width:420px;font-size:12px;font-weight:700}.sheet-share input{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;font:inherit}.share-suggestions{display:none;max-width:420px;margin-top:4px;border:1px solid var(--line);border-radius:9px;background:#fff;overflow:hidden}.share-suggestions.open{display:grid}.share-contact-option{padding:9px 10px;border:0;border-bottom:1px solid var(--line);background:white;text-align:left;font:inherit;cursor:pointer}.share-contact-option:hover{background:var(--mint)}.share-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.share-actions button{border:0;border-radius:9px;background:var(--green);color:#fff;padding:9px 12px;font-weight:700;cursor:pointer}.share-actions .secondary{border:1px solid var(--line);background:#fff;color:var(--ink)}.share-status{min-height:18px!important;margin-bottom:0!important;color:var(--green)!important}.install-app{border:0;border-radius:9px;background:var(--green);color:#fff;padding:8px 11px;font:700 12px Arial,sans-serif;cursor:pointer;margin-right:10px}.install-app[hidden]{display:none!important}@media(max-width:600px){.top-right{flex-wrap:wrap;justify-content:flex-end;gap:6px}.install-app{margin-right:0}}.install-hint{max-width:260px;color:var(--muted);font-size:11px}</style>
+.user-profile{border:0;background:transparent;font:inherit;color:inherit;cursor:pointer;padding:0}.user-profile:focus-visible{outline:3px solid #8ab79a;outline-offset:4px;border-radius:9px}.profession-suggestions{display:none;position:relative;z-index:5;max-height:220px;overflow:auto;border:1px solid var(--line);border-radius:9px;background:#fff;box-shadow:0 8px 22px #17221d18}.profession-suggestions.open{display:grid}.profession-suggestion{display:flex;justify-content:space-between;gap:10px;width:100%;padding:9px 10px;border:0;border-bottom:1px solid var(--line);background:white;text-align:left;color:var(--ink);font:inherit;font-size:12px;cursor:pointer}.profession-suggestion:last-child{border-bottom:0}.profession-suggestion:hover,.profession-suggestion:focus{background:var(--mint)}.profession-code{flex:none;color:var(--muted);font-size:11px}.sheet-tools{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:10px 0}.sheet-tools label{display:grid;gap:5px;max-width:360px;width:100%;font-size:12px;font-weight:700;color:#53635a}.sheet-tools input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-weight:400}.sheet-summary{font-size:12px;color:var(--muted);white-space:nowrap}.work-sheet{min-width:1100px}.work-sheet td:nth-child(1){min-width:180px}.work-sheet td:nth-child(2){min-width:140px}.work-sheet td:nth-child(6){min-width:180px}@media(max-width:720px){.sheet-tools{align-items:flex-start;flex-direction:column}.sheet-tools label{max-width:none}}.sheet-share{margin:10px 0;padding:14px;border:1px solid #dcebe0;border-radius:12px;background:#f7faf7}.sheet-share.hidden{display:none}.sheet-share>strong{display:block;color:var(--green);font-size:14px}.sheet-share>p{margin:5px 0 10px;color:var(--muted);font-size:12px}.sheet-share label{display:grid;gap:5px;max-width:420px;font-size:12px;font-weight:700}.sheet-share input{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;font:inherit}.share-suggestions{display:none;max-width:420px;margin-top:4px;border:1px solid var(--line);border-radius:9px;background:#fff;overflow:hidden}.share-suggestions.open{display:grid}.share-contact-option{padding:9px 10px;border:0;border-bottom:1px solid var(--line);background:white;text-align:left;font:inherit;cursor:pointer}.share-contact-option:hover{background:var(--mint)}.share-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.share-actions button{border:0;border-radius:9px;background:var(--green);color:#fff;padding:9px 12px;font-weight:700;cursor:pointer}.share-actions .secondary{border:1px solid var(--line);background:#fff;color:var(--ink)}.share-status{min-height:18px!important;margin-bottom:0!important;color:var(--green)!important}.install-app{border:0;border-radius:9px;background:var(--green);color:#fff;padding:8px 11px;font:700 12px Arial,sans-serif;cursor:pointer;margin-right:10px}.install-app[hidden]{display:none!important}@media(max-width:600px){.top-right{flex-wrap:wrap;justify-content:flex-end;gap:6px}.install-app{margin-right:0}}.install-hint{max-width:260px;color:var(--muted);font-size:11px}.focus-card{margin-top:18px;background:linear-gradient(120deg,#fff 68%,#eff7f0)}.focus-timer{display:grid;place-items:center;gap:4px;margin:14px 0;padding:18px 14px;border-radius:16px;background:#f1f7f2}.focus-phase{color:var(--muted);font-size:13px;font-weight:700}.focus-clock{color:var(--green);font-size:clamp(3rem,12vw,4.4rem);font-weight:800;line-height:1.1;letter-spacing:.04em;font-variant-numeric:tabular-nums}.focus-controls{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}.focus-controls select{min-height:40px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit}.focus-controls button{min-height:40px;padding:9px 12px;border-radius:9px;font-weight:700;cursor:pointer}.focus-start{border:0;background:var(--green);color:#fff}.focus-controls button:disabled{opacity:.55;cursor:not-allowed}.focus-status{min-height:18px;margin:12px 0 0;text-align:center;color:var(--muted);font-size:12px}.games-link{cursor:pointer;border:0;font:700 13px Arial,sans-serif}.educational-games[hidden],.games-setup[hidden],.games-play[hidden],.games-result[hidden]{display:none!important}.educational-games{margin:0 0 18px;scroll-margin-top:16px}.game-close{border:1px solid var(--line);border-radius:8px;background:#fff;padding:7px 10px;color:var(--ink);font:700 12px Arial,sans-serif;cursor:pointer}.games-intro{margin:-6px 0 16px}.games-setup{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:end}.games-setup label{display:grid;gap:6px;color:#53635a;font-size:12px;font-weight:700}.games-setup select{width:100%;min-height:42px;padding:9px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-size:13px}.games-start{min-height:42px;padding:10px 14px;border:0;border-radius:9px;background:var(--green);color:#fff;font:700 13px Arial,sans-serif;cursor:pointer}.games-start:hover{background:#286647}.games-level{display:inline-flex;padding:5px 10px;border-radius:99px;background:#e7f2eb;color:var(--green);font-size:12px;font-weight:800}.games-level-note{margin:8px 0 16px;color:var(--muted);font-size:13px}.games-meta{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:12px;font-weight:700;color:var(--muted)}.games-question{min-height:68px;margin:20px 0;text-align:center;font-size:clamp(19px,4vw,26px)}.games-answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.games-answer{min-height:48px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:700 14px Arial,sans-serif;cursor:pointer}.games-answer:hover:not(:disabled){border-color:#80ad8c;background:#f5faf6}.games-answer:disabled{cursor:default}.games-answer.correct{border-color:#5ca875;background:#e9f5ec;color:#23643a}.games-answer.wrong{border-color:#d88c81;background:#fff0ee;color:#9d4238}.games-feedback{min-height:22px;margin:12px 0;text-align:center;font-size:13px;font-weight:700}.games-feedback.good{color:#277047}.games-feedback.bad{color:#a7493e}.games-next{display:block;margin:0 auto}.games-result{text-align:center;padding:18px 0 6px}.games-result h3{margin:0}.games-result-emoji{font-size:34px}.games-result-score{color:var(--green);font-size:24px;font-weight:800}.games-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:720px){.games-setup{grid-template-columns:1fr}.games-start{width:100%}.games-meta{font-size:11px}}.intro-games-button{display:flex;align-items:center;gap:12px;width:100%;margin:16px 0;padding:12px 14px;border:1px solid #cfe2d3;border-radius:13px;background:linear-gradient(110deg,#f4faf5,#e8f3eb);color:var(--ink);text-align:left;font:inherit;cursor:pointer;transition:transform .15s,border-color .15s,box-shadow .15s}.intro-games-button:hover{transform:translateY(-1px);border-color:#83ad90;box-shadow:0 5px 16px #18342210}.intro-games-button:focus-visible{outline:3px solid #9bc8a8;outline-offset:3px}.intro-games-icon{font-size:23px}.intro-games-button strong,.intro-games-button small{display:block}.intro-games-button strong{color:var(--green);font-size:13px;letter-spacing:.3px}.intro-games-button small{margin-top:2px;color:var(--muted);font-size:11px}.intro-games-arrow{margin-left:auto;color:var(--green);font-size:20px;font-weight:800}body.games-screen-active{overflow:hidden}body.games-screen-active .intro{display:none!important}body.games-screen-active main.app>:not(#educationalGames){display:none!important}.educational-games.games-fullscreen{position:fixed;inset:0;z-index:10000;width:100%;height:100vh;height:100dvh;max-width:none;margin:0;overflow:auto;padding:clamp(18px,5vw,56px);border:0;border-radius:0;background:var(--bg);scroll-margin:0}.educational-games.games-fullscreen .games-question{font-size:clamp(23px,5vw,38px);margin:clamp(24px,7vh,70px) 0}.educational-games.games-fullscreen .games-answers{max-width:760px;margin:0 auto}.educational-games.games-fullscreen .games-answer{min-height:64px;font-size:17px}.educational-games.games-fullscreen .games-meta{max-width:760px;margin:auto}.educational-games.games-fullscreen .games-level-note{text-align:center}</style>
 <footer class="site-footer"><p>TarefaMix · Organize seus estudos e trabalho.</p></footer>
 <script>
   // CBO oficial do MTE: títulos e sinônimos para consulta offline.
@@ -141,14 +168,20 @@
   window.addEventListener('appinstalled', () => { installButton.hidden = true; installHint.hidden = true; });  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     navigator.serviceWorker.register('./service-worker.js').catch(() => {});
   }  const app = document.querySelector('main.app');
-  const roleStorageKey = 'tarefamix-perfil-v1';
+  const accountUserId = localStorage.getItem('tarefamix-auth-uid') || 'guest';
+  const accountStoragePrefix = `tarefamix:${accountUserId}:`;
+  const accountStorage = {
+    getItem(key) { try { return window.localStorage.getItem(accountStoragePrefix + key); } catch (_) { return null; } },
+    setItem(key, value) { try { window.localStorage.setItem(accountStoragePrefix + key, String(value)); } catch (_) {} },
+    removeItem(key) { try { window.localStorage.removeItem(accountStoragePrefix + key); } catch (_) {} }
+  };  const roleStorageKey = 'tarefamix-perfil-v1';
   let userRole = 'student';
   let hasSavedRole = false;
   let savedName = '';
   try {
-    const storedRole = localStorage.getItem(roleStorageKey);
+    const storedRole = accountStorage.getItem(roleStorageKey);
     if (storedRole === 'worker' || storedRole === 'student') { userRole = storedRole; hasSavedRole = true; }
-    savedName = localStorage.getItem('orgest-nome') || '';
+    savedName = accountStorage.getItem('orgest-nome') || '';
   } catch (_) {}
   app.dataset.mode = userRole;
   const list = document.querySelector('.tasks');
@@ -174,7 +207,7 @@
   }
   function loadTasks() {
     try {
-      const saved = localStorage.getItem(storageKey);
+      const saved = accountStorage.getItem(storageKey);
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) return parsed.filter(task => !isStarterExample(task));
@@ -186,7 +219,7 @@
   let draggingIndex = null;
   let editingIndex = null;
   let pendingDeleteIndex = null;
-  function save() { try { localStorage.setItem(storageKey, JSON.stringify(tasks)); } catch (_) {} }
+  function save() { try { accountStorage.setItem(storageKey, JSON.stringify(tasks)); } catch (_) {} }
   save();
   function taskDueDate(task) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(task.due || '')) return null;
@@ -314,16 +347,16 @@
     if (pendingDeleteIndex !== null) tasks.splice(pendingDeleteIndex, 1);
     save(); render(); closeDeleteTask();
   });
-  try { notesArea.value = localStorage.getItem('meu-planner-anotacoes-v1') || ''; } catch (_) {}
+  try { notesArea.value = accountStorage.getItem('meu-planner-anotacoes-v1') || ''; } catch (_) {}
   notesArea.addEventListener('input', () => {
     try {
-      localStorage.setItem('meu-planner-anotacoes-v1', notesArea.value);
+      accountStorage.setItem('meu-planner-anotacoes-v1', notesArea.value);
       notesStatus.textContent = 'Salvo automaticamente neste navegador';
     } catch (_) { notesStatus.textContent = 'Não foi possível salvar neste navegador'; }
   });
   document.querySelector('#clearNotes').addEventListener('click', () => {
     notesArea.value = '';
-    try { localStorage.removeItem('meu-planner-anotacoes-v1'); } catch (_) {}
+    try { accountStorage.removeItem('meu-planner-anotacoes-v1'); } catch (_) {}
     notesStatus.textContent = 'Anotações apagadas';
   });
   let pendingBackup = null;
@@ -331,7 +364,7 @@
     const backup = {
       format: 'tarefamix-backup', version: 1, exportedAt: new Date().toISOString(),
       tasks, notes: notesArea.value,
-      reminderTime: localStorage.getItem('meu-planner-lembrete') || '',
+      reminderTime: accountStorage.getItem('meu-planner-lembrete') || '',
       soundEnabled: soundEnabled, soundLevel: soundLevel
     };
     const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
@@ -358,19 +391,19 @@
     if (!pendingBackup) return;
     tasks = pendingBackup.tasks.map(task => ({ ...task })); save(); render();
     notesArea.value = pendingBackup.notes;
-    try { localStorage.setItem('meu-planner-anotacoes-v1', pendingBackup.notes); } catch (_) {}
+    try { accountStorage.setItem('meu-planner-anotacoes-v1', pendingBackup.notes); } catch (_) {}
     soundEnabled = pendingBackup.soundEnabled !== false;
     soundLevel = Math.max(0, Math.min(100, Number(pendingBackup.soundLevel ?? soundLevel)));
     soundVolume.value = soundLevel; soundVolumeValue.value = `${soundLevel}%`;
-    try { localStorage.setItem('meu-planner-som', soundEnabled ? 'on' : 'off'); } catch (_) {}
-    try { localStorage.setItem('meu-planner-volume', String(soundLevel)); } catch (_) {}
+    try { accountStorage.setItem('meu-planner-som', soundEnabled ? 'on' : 'off'); } catch (_) {}
+    try { accountStorage.setItem('meu-planner-volume', String(soundLevel)); } catch (_) {}
     updateSoundButton();
     if (pendingBackup.reminderTime) {
-      try { localStorage.setItem('meu-planner-lembrete', pendingBackup.reminderTime); } catch (_) {}
+      try { accountStorage.setItem('meu-planner-lembrete', pendingBackup.reminderTime); } catch (_) {}
       reminderTime.value = pendingBackup.reminderTime; scheduleReminder(pendingBackup.reminderTime); setReminderUI(true, pendingBackup.reminderTime);
     } else {
       if (reminderTimer) window.clearTimeout(reminderTimer); reminderTimer = null;
-      try { localStorage.removeItem('meu-planner-lembrete'); } catch (_) {}
+      try { accountStorage.removeItem('meu-planner-lembrete'); } catch (_) {}
       saveReminderButton.textContent = 'Ativar lembrete'; disableReminderButton.style.display = 'none';
       reminderStatus.textContent = 'Lembrete desativado.';
     }
@@ -381,8 +414,8 @@
   const soundToggle = document.querySelector('#soundToggle');
   const soundVolume = document.querySelector('#soundVolume');
   const soundVolumeValue = document.querySelector('#soundVolumeValue');
-  let soundEnabled = localStorage.getItem('meu-planner-som') !== 'off';
-  let soundLevel = Number(localStorage.getItem('meu-planner-volume') || 75);
+  let soundEnabled = accountStorage.getItem('meu-planner-som') !== 'off';
+  let soundLevel = Number(accountStorage.getItem('meu-planner-volume') || 75);
   soundLevel = Math.max(0, Math.min(100, Number.isFinite(soundLevel) ? soundLevel : 75));
   soundVolume.value = soundLevel; soundVolumeValue.value = `${soundLevel}%`;
   function updateSoundButton() {
@@ -393,11 +426,11 @@
   updateSoundButton();
   soundVolume.addEventListener('input', () => {
     soundLevel = Number(soundVolume.value); soundVolumeValue.value = `${soundLevel}%`;
-    try { localStorage.setItem('meu-planner-volume', String(soundLevel)); } catch (_) {}
+    try { accountStorage.setItem('meu-planner-volume', String(soundLevel)); } catch (_) {}
   });
   soundToggle.addEventListener('click', () => {
     soundEnabled = !soundEnabled;
-    try { localStorage.setItem('meu-planner-som', soundEnabled ? 'on' : 'off'); } catch (_) {}
+    try { accountStorage.setItem('meu-planner-som', soundEnabled ? 'on' : 'off'); } catch (_) {}
     updateSoundButton();
     if (soundEnabled) playSound('toggle');
   });
@@ -474,22 +507,82 @@
     if ('Notification' in window && Notification.permission === 'default') {
       try { await Notification.requestPermission(); } catch (_) {}
     }
-    try { localStorage.setItem('meu-planner-lembrete', time); } catch (_) {}
+    try { accountStorage.setItem('meu-planner-lembrete', time); } catch (_) {}
     scheduleReminder(time); setReminderUI(true, time);
   });
   disableReminderButton.addEventListener('click', () => {
     if (reminderTimer) window.clearTimeout(reminderTimer);
     reminderTimer = null;
-    try { localStorage.removeItem('meu-planner-lembrete'); } catch (_) {}
+    try { accountStorage.removeItem('meu-planner-lembrete'); } catch (_) {}
     saveReminderButton.textContent = 'Ativar lembrete';
     disableReminderButton.style.display = 'none';
     reminderStatus.textContent = 'Lembrete desativado.';
   });
   try {
-    const savedReminder = localStorage.getItem('meu-planner-lembrete');
+    const savedReminder = accountStorage.getItem('meu-planner-lembrete');
     if (savedReminder) { reminderTime.value = savedReminder; scheduleReminder(savedReminder); setReminderUI(true, savedReminder); }
   } catch (_) {}
 
+  const focusDurationSelect = document.querySelector('#focusDuration');
+  const focusClock = document.querySelector('#focusClock');
+  const focusPhase = document.querySelector('#focusPhase');
+  const focusStartButton = document.querySelector('#startFocus');
+  const focusPauseButton = document.querySelector('#pauseFocus');
+  const focusResetButton = document.querySelector('#resetFocus');
+  const focusStatus = document.querySelector('#focusStatus');
+  let focusRemainingMs = Number(focusDurationSelect.value) * 60000;
+  let focusDeadline = 0;
+  let focusTimerId = null;
+  function renderFocusTimer() {
+    const seconds = Math.max(0, Math.ceil(focusRemainingMs / 1000));
+    focusClock.textContent = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
+  }
+  function resetFocusTimer() {
+    if (focusTimerId !== null) window.clearInterval(focusTimerId);
+    focusTimerId = null;
+    focusRemainingMs = Number(focusDurationSelect.value) * 60000;
+    focusPhase.textContent = focusDurationSelect.selectedOptions[0].dataset.phase;
+    focusStartButton.textContent = 'Começar';
+    focusPauseButton.disabled = true;
+    focusDurationSelect.disabled = false;
+    focusStatus.textContent = 'Escolha um tempo e comece quando quiser.';
+    renderFocusTimer();
+  }
+  focusDurationSelect.addEventListener('change', resetFocusTimer);
+  focusStartButton.addEventListener('click', () => {
+    if (focusTimerId !== null) return;
+    if (focusRemainingMs <= 0) resetFocusTimer();
+    focusDeadline = Date.now() + focusRemainingMs;
+    focusDurationSelect.disabled = true;
+    focusPauseButton.disabled = false;
+    focusStartButton.textContent = 'Em andamento';
+    focusStatus.textContent = 'Foco iniciado. Continue com a página aberta.';
+    focusTimerId = window.setInterval(() => {
+      focusRemainingMs = Math.max(0, focusDeadline - Date.now());
+      renderFocusTimer();
+      if (focusRemainingMs <= 0) {
+        window.clearInterval(focusTimerId);
+        focusTimerId = null;
+        focusDurationSelect.disabled = false;
+        focusPauseButton.disabled = true;
+        focusStartButton.textContent = 'Começar de novo';
+        focusStatus.textContent = focusPhase.textContent === 'Pausa' ? 'Pausa concluída. Você pode começar outro ciclo.' : 'Ciclo concluído! Faça uma pausa ou comece outro ciclo.';
+        playSound('complete');
+      }
+    }, 250);
+  });
+  focusPauseButton.addEventListener('click', () => {
+    if (focusTimerId === null) return;
+    focusRemainingMs = Math.max(0, focusDeadline - Date.now());
+    window.clearInterval(focusTimerId);
+    focusTimerId = null;
+    focusDurationSelect.disabled = false;
+    focusPauseButton.disabled = true;
+    focusStartButton.textContent = 'Continuar';
+    focusStatus.textContent = 'Timer pausado.';
+    renderFocusTimer();
+  });
+  focusResetButton.addEventListener('click', resetFocusTimer);
   const studyChat = document.querySelector('#studyChat');
   const studyInput = document.querySelector('#subjectSearch');
   let lastStudyIntent = null;
@@ -651,7 +744,7 @@
     workEmpty.textContent = rows.length === 0 ? 'Clique em “Nova linha” para começar.' : visibleRows === 0 ? 'Nenhuma atividade corresponde à busca.' : '';
   }
   function saveWorkRows() {
-    try { localStorage.setItem(workStorageKey, JSON.stringify(currentWorkRows())); } catch (_) {}
+    try { accountStorage.setItem(workStorageKey, JSON.stringify(currentWorkRows())); } catch (_) {}
     updateWorkSummary();
   }
   function makeSheetCell(row, column, type, placeholder) {
@@ -703,7 +796,7 @@
     applyWorkSearch();
   }
   try {
-    const savedRows = JSON.parse(localStorage.getItem(workStorageKey) || '[]');
+    const savedRows = JSON.parse(accountStorage.getItem(workStorageKey) || '[]');
     renderWorkRows(Array.isArray(savedRows) ? savedRows.filter(function(row) { return row && typeof row.activity === 'string'; }).slice(0, 200) : []);
   } catch (_) { renderWorkRows([]); }
   document.querySelector('#addWorkRow').addEventListener('click', function() {
@@ -746,7 +839,7 @@
   let shareContacts = [];
   let selectedShareContact = '';
   try {
-    const savedContacts = JSON.parse(localStorage.getItem(shareStorageKey) || '[]');
+    const savedContacts = JSON.parse(accountStorage.getItem(shareStorageKey) || '[]');
     if (Array.isArray(savedContacts)) shareContacts = savedContacts.filter(function(name) { return typeof name === 'string' && name.trim(); }).slice(0, 100);
   } catch (_) {}
   function renderShareSuggestions() {
@@ -777,7 +870,7 @@
     selectedShareContact = existing || name;
     if (!existing && shareContacts.length < 100) {
       shareContacts.push(name);
-      try { localStorage.setItem(shareStorageKey, JSON.stringify(shareContacts)); } catch (_) {}
+      try { accountStorage.setItem(shareStorageKey, JSON.stringify(shareContacts)); } catch (_) {}
     }
     shareInput.value = selectedShareContact;
     shareSuggestions.classList.remove('open');
@@ -789,7 +882,7 @@
     selectedShareContact = recipient;
     if (!shareContacts.some(function(name) { return name.toLocaleLowerCase('pt-BR') === recipient.toLocaleLowerCase('pt-BR'); }) && shareContacts.length < 100) {
       shareContacts.push(recipient);
-      try { localStorage.setItem(shareStorageKey, JSON.stringify(shareContacts)); } catch (_) {}
+      try { accountStorage.setItem(shareStorageKey, JSON.stringify(shareContacts)); } catch (_) {}
     }
     const filename = 'tarefamix-planilha.csv';
     const file = new File([buildWorkCsv()], filename, { type: 'text/csv;charset=utf-8' });
@@ -977,7 +1070,7 @@
   function updateRole(mode, persistChoice = true) {
     userRole = mode === 'worker' ? 'worker' : 'student';
     app.dataset.mode = userRole;
-    if (persistChoice) { try { localStorage.setItem(roleStorageKey, userRole); hasSavedRole = true; } catch (_) {} }
+    if (persistChoice) { try { accountStorage.setItem(roleStorageKey, userRole); hasSavedRole = true; } catch (_) {} }
     document.querySelectorAll('.role-choice').forEach(button => {
       const selected = button.dataset.role === userRole;
       button.setAttribute('aria-pressed', String(selected));
@@ -995,6 +1088,8 @@
     document.querySelector('#yourName').value = savedName;
     document.querySelector('#welcomeLine').textContent = 'Atualize seu nome ou escolha como vai usar o TarefaMix.';
     document.querySelector('#welcomeForm button[type="submit"]').textContent = 'Salvar perfil';
+    document.querySelector('#profileSetup').hidden = false;
+    document.querySelector('#authPanel').hidden = true;
     document.querySelector('#introScreen').classList.remove('hidden');
     document.querySelector('#yourName').focus();
   });  const welcomeForm = document.querySelector('#welcomeForm');
@@ -1003,7 +1098,7 @@
     const name = document.querySelector('#yourName').value.trim();
     document.querySelector('#welcomeLine').textContent = `Que bom ter você aqui, ${name}!`;
     savedName = name;
-    try { localStorage.setItem('orgest-nome', name); localStorage.setItem(roleStorageKey, userRole); hasSavedRole = true; } catch (_) {}
+    try { accountStorage.setItem('orgest-nome', name); accountStorage.setItem(roleStorageKey, userRole); hasSavedRole = true; } catch (_) {}
     setGreeting(name);
     document.querySelector('#introScreen').classList.add('hidden');
     welcomeForm.reset();
@@ -1011,7 +1106,7 @@
   });
 })();
 </script>
-</body></html>
+<script src="./games.js"></script><script src="./auth-config.js"></script><script type="module" src="./auth.js"></script></body></html>
 
 
 
