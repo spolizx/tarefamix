@@ -1,4 +1,4 @@
-const CACHE_NAME = "tarefamix-shell-v9";
+const CACHE_NAME = "tarefamix-shell-v10";
 const APP_FILES = [
   "./",
   "./index.html",
