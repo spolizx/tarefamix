@@ -1,9 +1,10 @@
-const CACHE_NAME = "tarefamix-shell-v13";
+const CACHE_NAME = "tarefamix-shell-v14";
 const APP_FILES = [
   "./",
   "./index.html",
   "./games.js",
   "./music.js",
+  "./youtube-config.js",
   "./auth.js",
   "./jogos/index.html",
   "./manifest.webmanifest",
