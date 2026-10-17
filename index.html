@@ -4,13 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TarefaMix — Organizador escolar</title>
+  <meta name="description" content="TarefaMix — organiza tarefas, timer Pomodoro, planilha rápida e assistente local. Tudo salvo no navegador, sem IA externa.">
+  <meta property="og:title" content="TarefaMix — Organizador escolar">
+  <meta property="og:description" content="Organize tarefas, tempo e anotações. Offline e gratuito.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#347a58">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/ui-enhancements.css">
 </head>
 <body>
-  <div class="app-shell">
+  <div class="app-shell" role="application" aria-label="TarefaMix Organizador">
     <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark">✳</div>
+      <div class="brand" role="banner">
+        <div class="brand-mark" aria-hidden="true">✳</div>
         <div>
           <div class="brand-name">TarefaMix</div>
           <div class="brand-subtitle">Organizador escolar</div>
@@ -18,6 +25,13 @@
       </div>
 
       <div class="top-actions">
+        <div class="mode-toggle" title="Alternar modo">
+          <label for="modeSelect" class="visually-hidden">Modo</label>
+          <select id="modeSelect" aria-label="Selecionar modo">
+            <option value="student">Estudando</option>
+            <option value="worker">Trabalhando</option>
+          </select>
+        </div>
         <button class="ghost-button" id="reloadBtn" type="button">Recarregar</button>
         <button class="ghost-button" id="exportCsvBtn" type="button">Exportar CSV</button>
         <button class="ghost-button" id="exportJsonBtn" type="button">Backup (JSON)</button>
@@ -106,6 +120,27 @@
 
           <textarea id="notesArea" class="notes-area" placeholder="Escreva suas ideias, lembretes e resumos..."></textarea>
         </section>
+
+        <section class="card" id="sheetCard">
+          <div class="panel-head">
+            <h2>Planilha rápida</h2>
+            <div>
+              <button class="small-btn" id="addRowBtn">＋ Nova linha</button>
+              <button class="small-btn" id="exportSheetCsv">Exportar CSV</button>
+              <label class="small-btn" for="importSheetInput" style="cursor:pointer">Importar JSON</label>
+              <input id="importSheetInput" type="file" accept="application/json" style="display:none">
+            </div>
+          </div>
+          <div id="sheetContainer" class="sheet-container">
+            <table id="sheetTable" class="sheet-table" aria-label="Planilha rápida">
+              <thead>
+                <tr><th>Item</th><th>Descrição</th><th>Qtd</th><th>Ações</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
       </aside>
     </main>
   </div>

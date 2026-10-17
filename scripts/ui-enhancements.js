@@ -1,6 +1,8 @@
-// ui-enhancements.js - UI behavior (local-only) with export/backup
+// ui-enhancements.js - UI behavior (local-only) with export/backup and sheet + mode toggle
 const STORAGE_TASKS = 'tarefamix.tasks.v1';
 const STORAGE_NOTES = 'tarefamix.notes.v1';
+const STORAGE_SHEET = 'tarefamix.sheet.v1';
+const STORAGE_MODE = 'tarefamix.mode.v1';
 
 const taskForm = document.getElementById('taskForm');
 const taskTitleInput = document.getElementById('taskTitle');
@@ -23,10 +25,38 @@ const exportCsvBtn = document.getElementById('exportCsvBtn');
 const exportJsonBtn = document.getElementById('exportJsonBtn');
 const exportTasksCsvBtn = document.getElementById('exportTasksCsv');
 
+const modeSelect = document.getElementById('modeSelect');
+
+const addRowBtn = document.getElementById('addRowBtn');
+const exportSheetCsv = document.getElementById('exportSheetCsv');
+const importSheetInput = document.getElementById('importSheetInput');
+const sheetTableBody = document.querySelector('#sheetTable tbody');
+
 let tasks = JSON.parse(localStorage.getItem(STORAGE_TASKS) || '[]');
+let sheet = JSON.parse(localStorage.getItem(STORAGE_SHEET) || '[]');
 let timerSeconds = 25 * 60;
 let timerId = null;
 
+// Mode handling
+function loadMode(){
+  const mode = localStorage.getItem(STORAGE_MODE) || 'student';
+  modeSelect.value = mode;
+  applyMode(mode);
+}
+function applyMode(mode){
+  const app = document.querySelector('.app-shell');
+  app.setAttribute('data-mode', mode);
+  // show/hide elements by mode if needed (example: show sheet only in worker mode)
+  const sheetCard = document.getElementById('sheetCard');
+  if(sheetCard){
+    sheetCard.style.display = (mode === 'worker') ? 'block' : 'none';
+  }
+  localStorage.setItem(STORAGE_MODE, mode);
+}
+modeSelect.addEventListener('change', (e)=> applyMode(e.target.value));
+loadMode();
+
+// Tasks
 function saveTasks() {
   localStorage.setItem(STORAGE_TASKS, JSON.stringify(tasks));
   renderTasks();
@@ -128,6 +158,7 @@ taskList.addEventListener('click', (event) => {
   }
 });
 
+// Timer
 function renderTimer() {
   const minutes = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
   const seconds = String(timerSeconds % 60).padStart(2, '0');
@@ -164,6 +195,7 @@ helpBtn.addEventListener('click', () => {
   alert('TarefaMix funciona localmente e salva tudo no navegador. Você pode adicionar tarefas, usar o timer e pedir ajuda de estudo sem IA externa. Use Exportar CSV para baixar suas tarefas.');
 });
 
+// Assistant
 function addAssistantMessage(text, who = 'bot') {
   const el = document.createElement('div');
   el.className = `message ${who}`;
@@ -175,7 +207,7 @@ function addAssistantMessage(text, who = 'bot') {
 function answerLocalStudyQuestion(question) {
   const q = question.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-  if (q.includes('fraçao') || q.includes('fracao') || q.includes('fracao') || q.includes('frações') || q.includes('frações')) {
+  if (q.includes('fracao') || q.includes('fracao') || q.includes('fraction') || q.includes('frações')) {
     return 'Para somar frações com denominadores iguais, some os numeradores e mantenha o denominador. Exemplo: 2/7 + 3/7 = 5/7. Se os denominadores forem diferentes, primeiro encontre o mínimo múltiplo comum.';
   }
 
@@ -183,16 +215,16 @@ function answerLocalStudyQuestion(question) {
     return 'A raiz quadrada de 25 é 5, porque 5 × 5 = 25. Para calcular outras raízes, procure um número que multiplicado por si mesmo resulte no número original.';
   }
 
-  if (q.includes('fotossintese') || q.includes('fotossíntese') || q.includes('fotossintese')) {
+  if (q.includes('fotossintese') || q.includes('fotossintese')) {
     return 'Fotossíntese: plantas usam luz solar, água e dióxido de carbono para produzir glicose e liberar oxigênio.';
   }
 
-  if (q.includes('equacao') || q.includes('equação')) {
+  if (q.includes('equacao') || q.includes('equacao')) {
     return 'Para resolver uma equação, isole a incógnita fazendo operações inversas em ambos os lados. Ex: x + 4 = 9 → x = 5.';
   }
 
-  if (q.includes('matematica') || q.includes('matemática')) {
-    return 'Matemática envolve números e estruturas. Posso explicar frações, multiplicação, divisão e equações simples.';
+  if (q.includes('matematica') || q.includes('matematica')) {
+    return 'Matemática envolve números e estruturas. Posso explicar frações, multiplicação, divisões e equações simples.';
   }
 
   if (q.includes('tempo') || q.includes('foco')) {
@@ -219,6 +251,7 @@ assistantForm.addEventListener('submit', (event) => {
   assistantSend.click();
 });
 
+// Notes
 notesArea.value = localStorage.getItem(STORAGE_NOTES) || '';
 notesArea.addEventListener('input', () => {
   localStorage.setItem(STORAGE_NOTES, notesArea.value);
@@ -249,8 +282,9 @@ function exportFullBackupJson() {
   const backup = {
     exportedAt: new Date().toISOString(),
     tasks,
+    sheet,
     notes: localStorage.getItem(STORAGE_NOTES) || '',
-    timer: { defaultSeconds: 25 * 60 }
+    mode: localStorage.getItem(STORAGE_MODE) || 'student'
   };
   download('tarefamix-backup-' + new Date().toISOString().slice(0,10) + '.json', JSON.stringify(backup, null, 2), 'application/json');
 }
@@ -259,6 +293,60 @@ exportCsvBtn.addEventListener('click', () => exportTasksAsCsv());
 exportTasksCsvBtn.addEventListener('click', () => exportTasksAsCsv());
 exportJsonBtn.addEventListener('click', () => exportFullBackupJson());
 
+// Sheet functions
+function saveSheet(){
+  localStorage.setItem(STORAGE_SHEET, JSON.stringify(sheet));
+  renderSheet();
+}
+
+function renderSheet(){
+  sheetTableBody.innerHTML = '';
+  if(!sheet.length){
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td colspan="4" style="opacity:.7">Nenhuma linha. Clique em "＋ Nova linha" para começar.</td>';
+    sheetTableBody.appendChild(tr);
+    return;
+  }
+  sheet.forEach((row, i)=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input value="${escapeHtml(row.item||'')}" data-i="${i}" data-field="item"></td>
+      <td><input value="${escapeHtml(row.desc||'')}" data-i="${i}" data-field="desc"></td>
+      <td><input value="${escapeHtml(row.qty||'')}" data-i="${i}" data-field="qty"></td>
+      <td class="sheet-actions"><button class="small-btn" data-delete-row="${i}">Apagar</button></td>
+    `;
+    sheetTableBody.appendChild(tr);
+  });
+}
+
+sheetTableBody.addEventListener('input', (e)=>{
+  const inp = e.target.closest('input'); if(!inp) return; const i = Number(inp.dataset.i); const f = inp.dataset.field; if(!Number.isFinite(i) || !f) return; sheet[i][f] = inp.value; saveSheet();
+});
+
+sheetTableBody.addEventListener('click', (e)=>{
+  const del = e.target.closest('[data-delete-row]'); if(!del) return; const i = Number(del.dataset.deleteRow); if(Number.isFinite(i)){ sheet.splice(i,1); saveSheet(); }
+});
+
+addRowBtn.addEventListener('click', ()=>{ sheet.push({item:'',desc:'',qty:''}); saveSheet(); });
+
+exportSheetCsv.addEventListener('click', ()=>{
+  if(!sheet.length) return alert('Planilha vazia.');
+  const rows = [['Item','Descrição','Qtd']];
+  sheet.forEach(r=> rows.push([r.item||'', r.desc||'', r.qty||'']));
+  const csv = rows.map(r => r.map(c => '"'+String(c).replace(/"/g,'""')+'"').join(';')).join('\r\n');
+  download('planilha-tarefamix.csv', '\uFEFF'+csv, 'text/csv;charset=utf-8');
+});
+
+importSheetInput.addEventListener('change', (e)=>{
+  const f = e.target.files && e.target.files[0]; if(!f) return; const reader = new FileReader(); reader.onload = ()=>{
+    try{ const data = JSON.parse(reader.result); if(Array.isArray(data.sheet)) { sheet = data.sheet; saveSheet(); alert('Importação concluída.'); } else { alert('Arquivo inválido: não contém planilha.'); } }catch(err){ alert('Erro ao ler arquivo: '+err.message);} }, reader.readAsText(f);
+});
+
+// Load sheet and initial
+sheet = sheet || [];
+renderSheet();
+
 // initial render
 renderTasks();
 renderTimer();
+renderSheet();
