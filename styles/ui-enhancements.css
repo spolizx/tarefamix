@@ -55,3 +55,32 @@ html,body{height:100%}body{margin:0;font-family:Inter, system-ui, -apple-system,
 .footer a{color:var(--muted);text-decoration:none}
 .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
 @media (max-width:920px){.layout{grid-template-columns:1fr}.search-wrap input{width:160px}.hero-visual img{display:none}}
+
+/* Corrige sobreposição de botões no topo */
+.top-actions{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap; /* permite quebrar linha em telas menores */
+}
+.search-wrap{ 
+  flex: 0 1 320px; /* ocupa espaço, mas pode encolher */
+  min-width: 160px; /* não encolher demais */
+}
+.top-buttons{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.top-buttons .ghost-button,
+.top-buttons .primary-button,
+.top-buttons .small-btn{
+  white-space: nowrap; /* botão não quebra texto interno */
+}
+
+/* ajuste para telas pequenas */
+@media (max-width:920px){
+  .search-wrap{ flex-basis: 160px; }
+  .top-actions{ gap:8px; }
+}
