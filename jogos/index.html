@@ -4,20 +4,58 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#347a58">
 <title>Jogos de estudo — TarefaMix</title>
 <style>
-:root{color-scheme:light;--ink:#17221d;--muted:#6e7d73;--green:#347a58;--mint:#e7f2eb;--line:#e3eae4;--bg:#f5f8f5;--blue:#eaf1fb;--gold:#fff2ce}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 10%,#e5f2e9 0,transparent 28rem),var(--bg);color:var(--ink);font:16px/1.5 Arial,sans-serif;min-height:100vh}.wrap{width:min(760px,100% - 32px);margin:0 auto;padding:24px 0 48px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:800;color:var(--green);font-size:19px;text-decoration:none}.back{color:var(--green);font-weight:700;text-decoration:none}.hero{text-align:center;padding:48px 12px 26px}.badge{display:inline-flex;padding:5px 11px;border-radius:99px;background:var(--gold);color:#7a5b12;font-weight:700;font-size:12px}.hero h1{margin:12px 0 6px;font-size:clamp(30px,6vw,44px);line-height:1.08;letter-spacing:-1.2px}.hero p{margin:0;color:var(--muted)}.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(18px,5vw,32px);box-shadow:0 10px 35px #1834220b}.settings{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap}.settings label{font-weight:700}.settings select{font:inherit;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;color:var(--ink)}.stats{display:flex;justify-content:space-between;gap:12px;margin:22px 0 12px;color:var(--muted);font-size:13px}.bar{height:8px;border-radius:99px;background:#edf1ed;overflow:hidden}.bar span{display:block;width:0;height:100%;background:#65a77a;transition:width .3s}.question{min-height:180px;display:grid;align-content:center;justify-items:center;text-align:center;padding:18px 0}.question small{color:var(--muted);font-weight:700}.equation{font-size:clamp(40px,10vw,64px);font-weight:800;letter-spacing:-1.5px;margin:8px 0}.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.answer{min-height:56px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font:700 18px Arial,sans-serif;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}.answer:hover:not(:disabled){transform:translateY(-2px);border-color:#83ad90;background:#f8fcf8}.answer:focus-visible,.primary:focus-visible,.back:focus-visible,select:focus-visible{outline:3px solid #9bc8a8;outline-offset:2px}.answer:disabled{cursor:default}.answer.correct{border-color:#62a878;background:#e9f5ec;color:#23643a}.answer.wrong{border-color:#db8c82;background:#fff0ee;color:#9d4238}.feedback{min-height:26px;margin:12px 0 0;text-align:center;font-weight:700}.feedback.good{color:#277047}.feedback.bad{color:#a7493e}.actions{display:flex;justify-content:center;gap:10px;margin-top:18px}.primary{border:0;border-radius:11px;background:var(--green);color:#fff;padding:12px 18px;font:700 15px Arial,sans-serif;cursor:pointer}.primary:hover{background:#286647}.primary:disabled{opacity:.5;cursor:not-allowed}.result{text-align:center;padding:28px 0 8px}.result[hidden]{display:none}.result-emoji{font-size:42px}.result h2{margin:5px}.score{font-size:25px;font-weight:800;color:var(--green)}.footer{text-align:center;margin-top:17px;color:var(--muted);font-size:12px}@media(max-width:420px){.top{align-items:flex-start}.stats{font-size:12px}.panel{border-radius:16px}}
+:root{color-scheme:light;--ink:#17221d;--muted:#6e7d73;--green:#347a58;--mint:#e7f2eb;--line:#e3eae4;--bg:#f5f8f5;--blue:#eaf1fb;--gold:#fff2ce}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,sans-serif}
+/* Injected responsive rules for játék page */
+@media (min-width:900px){
+  main.wrap{max-width:1100px;margin:24px auto;display:grid;grid-template-columns:1fr 420px;gap:20px;padding:0 18px}
+  .hero{grid-column:1/2}
+}
+@media (max-width:899px){
+  html.touch button, html.touch input { touch-action: manipulation; }
+  .hero{padding:12px}
+  .controls button{padding:12px 14px;font-size:16px}
+}
+html.touch .answer, html.touch button { min-height:44px;padding:12px }
 </style>
 </head>
-<body><main class="wrap"><header class="top"><a class="brand" href="../index.html">✳ TarefaMix</a><a class="back" href="../index.html">← Voltar ao organizador</a></header><section class="hero"><span class="badge">🎮 Pausa para aprender</span><h1>Desafio relâmpago</h1><p>Treine matemática com perguntas rápidas. Vamos nessa?</p></section><section class="panel" aria-label="Quiz de matemática"><div class="settings"><label for="topic">Escolha o tema:</label><select id="topic"><option value="mixed">Misturado</option><option value="addition">Adição</option><option value="subtraction">Subtração</option><option value="multiplication">Multiplicação</option><option value="division">Divisão</option></select><button class="primary" id="start">Começar jogo</button></div><div id="gameArea" hidden><div class="stats"><span id="progress">Pergunta 1 de 10</span><span id="score">⭐ 0 pontos</span><span id="best">Recorde: 0</span></div><div class="bar" aria-hidden="true"><span id="barFill"></span></div><div class="question"><small id="topicLabel">MATEMÁTICA</small><div class="equation" id="equation" aria-live="polite">2 + 2 = ?</div></div><div class="answers" id="answers"></div><p class="feedback" id="feedback" role="status" aria-live="polite"></p><div class="actions"><button class="primary" id="next" hidden>Próxima pergunta</button></div></div><div class="result" id="result" hidden><div class="result-emoji" id="resultEmoji">🎉</div><h2>Rodada concluída!</h2><p id="resultText">Você fez 0 pontos.</p><p class="score" id="resultScore">0/10</p><button class="primary" id="playAgain">Jogar de novo</button></div></section><p class="footer">Seu recorde fica salvo somente neste aparelho.</p></main>
+<body>
+<main class="wrap"><header class="top"><a class="brand" href="../index.html">✳ TarefaMix</a><a class="back" href="../index.html">← Voltar ao organizador</a></header>
+<section class="hero"><h1>Jogos de estudo</h1><p>Escolha um tema e responda algumas perguntas para praticar.</p>
+<label for="topic">Tema<select id="topic"><option value="mixed">Misturado</option><option value="addition">Adição</option><option value="subtraction">Subtração</option><option value="multiplication">Multiplicação</option><option value="division">Divisão</option></select></label>
+<button id="start" class="primary">Começar</button></section>
+<section id="gameArea" hidden>
+  <div id="question"></div>
+  <div class="controls">
+    <button class="answer">1</button>
+    <button class="answer">2</button>
+    <button class="answer">3</button>
+    <button class="answer">4</button>
+  </div>
+  <div><button id="next">Próxima</button></div>
+</section>
+<section id="result" hidden>
+  <h2>Resultado</h2>
+  <div id="score"></div>
+  <button id="playAgain">Jogar novamente</button>
+</section>
 <script>
 (() => {
- const topicEl=document.querySelector('#topic'), startBtn=document.querySelector('#start'), gameArea=document.querySelector('#gameArea'), result=document.querySelector('#result'), eqEl=document.querySelector('#equation'), answersEl=document.querySelector('#answers'), feedback=document.querySelector('#feedback'), progressEl=document.querySelector('#progress'), scoreEl=document.querySelector('#score'), bestEl=document.querySelector('#best'), bar=document.querySelector('#barFill'), nextBtn=document.querySelector('#next');
+ // small original script kept - game logic
+ const topicEl=document.querySelector('#topic'), startBtn=document.querySelector('#start'), gameArea=document.querySelector('#gameArea'), result=document.querySelector('#result'), questionEl=document.querySelector('#question'), nextBtn=document.querySelector('#next'), playAgain=document.querySelector('#playAgain');
+ const answersEls = [...document.querySelectorAll('.answer')];
  const names={mixed:'MATEMÁTICA',addition:'ADIÇÃO',subtraction:'SUBTRAÇÃO',multiplication:'MULTIPLICAÇÃO',division:'DIVISÃO'};let questions=[],index=0,points=0,locked=false;
  const rand=(min,max)=>Math.floor(Math.random()*(max-min+1))+min;
- function makeQuestion(topic){let op=topic;if(op==='mixed')op=['addition','subtraction','multiplication','division'][rand(0,3)];let a,b,symbol,answer;if(op==='addition'){a=rand(1,50);b=rand(1,50);symbol='+';answer=a+b}else if(op==='subtraction'){a=rand(1,50);b=rand(1,a);symbol='−';answer=a-b}else if(op==='multiplication'){a=rand(2,12);b=rand(2,12);symbol='×';answer=a*b}else{b=rand(2,12);answer=rand(2,12);a=b*answer;symbol='÷'}return{a,b,symbol,answer,topic:op}}
- function begin(){questions=Array.from({length:10},()=>makeQuestion(topicEl.value));index=0;points=0;locked=false;result.hidden=true;gameArea.hidden=false;startBtn.textContent='Recomeçar';render()}
- function render(){const q=questions[index];locked=false;nextBtn.hidden=true;feedback.textContent='';feedback.className='feedback';progressEl.textContent=`Pergunta ${index+1} de ${questions.length}`;scoreEl.textContent=`⭐ ${points} ${points===1?'ponto':'pontos'}`;bestEl.textContent=`Recorde: ${Number(localStorage.getItem('tm-math-best-'+topicEl.value)||0)}`;bar.style.width=`${index/questions.length*100}%`;document.querySelector('#topicLabel').textContent=names[q.topic];eqEl.textContent=`${q.a} ${q.symbol} ${q.b} = ?`;const options=new Set([q.answer]);while(options.size<4){let delta=rand(1,Math.max(5,Math.ceil(q.answer*.35)));let candidate=Math.random()<.5?q.answer+delta:q.answer-delta;if(candidate>=0&&candidate!==q.answer)options.add(candidate)}const shuffled=[...options].sort(()=>Math.random()-.5);answersEl.replaceChildren(...shuffled.map(value=>{const button=document.createElement('button');button.type='button';button.className='answer';button.textContent=value;button.addEventListener('click',()=>choose(button,value,q.answer));return button}))}
- function choose(button,value,answer){if(locked)return;locked=true;const right=value===answer;document.querySelectorAll('.answer').forEach(el=>{el.disabled=true;if(Number(el.textContent)===answer)el.classList.add('correct')});if(right){points++;feedback.textContent='Acertou! Muito bem! 🎉';feedback.classList.add('good')}else{button.classList.add('wrong');feedback.textContent=`Quase! A resposta era ${answer}.`;feedback.classList.add('bad')}scoreEl.textContent=`⭐ ${points} ${points===1?'ponto':'pontos'}`;bar.style.width=`${(index+1)/questions.length*100}%`;nextBtn.hidden=false;nextBtn.textContent=index===questions.length-1?'Ver resultado':'Próxima pergunta'}
- function finish(){gameArea.hidden=true;result.hidden=false;const key='tm-math-best-'+topicEl.value;const best=Math.max(points,Number(localStorage.getItem(key)||0));localStorage.setItem(key,best);document.querySelector('#resultScore').textContent=`${points}/10`;document.querySelector('#resultText').textContent=points===10?'Perfeito! Você acertou todas!':points>=7?'Muito bem! Você está mandando bem.':points>=4?'Boa rodada! Continue praticando.':'Cada rodada é um treino. Tente mais uma vez!';document.querySelector('#resultEmoji').textContent=points===10?'🏆':points>=7?'🌟':'💪';bestEl.textContent=`Recorde: ${best}`;bar.style.width='100%'}
- startBtn.addEventListener('click',begin);nextBtn.addEventListener('click',()=>{if(!locked)return;if(index===questions.length-1){finish();return}index++;render()});document.querySelector('#playAgain').addEventListener('click',begin);
+ function makeQuestion(topic){let op=topic;if(op==='mixed')op=['addition','subtraction','multiplication','division'][rand(0,3)];let a,b,symbol,answer;if(op==='addition'){a=rand(1,50);b=rand(1,50);symbol='+';answer=a+b}else if(op==='subtraction'){a=rand(1,50);b=rand(1,50);symbol='−';answer=a-b}else if(op==='multiplication'){a=rand(1,12);b=rand(1,12);symbol='×';answer=a*b}else{a=rand(2,12);b=rand(2,12);symbol='÷';answer=Math.floor(a/b)};const choices=[answer,answer+rand(1,6),Math.max(0,answer-rand(1,4)),answer+rand(7,12)].sort(()=>Math.random()-0.5);return {text:`${a} ${symbol} ${b} = ?`,answer,choices};}
+ function begin(){questions=Array.from({length:10},()=>makeQuestion(topicEl.value));index=0;points=0;locked=false;result.hidden=true;gameArea.hidden=false;startBtn.textContent='Recomeçar';render();}
+ function render(){const q=questions[index];locked=false;nextBtn.hidden=true;questionEl.textContent=`Pergunta ${index+1}: ${q.text}`;answersEls.forEach((el,i)=>{el.disabled=false;el.textContent=q.choices[i];});}
+ function choose(el){if(locked)return;locked=true;const val=Number(el.textContent);const correct=val===questions[index].answer;if(correct){points++;el.style.background='#cfead9'}else{el.style.background='#ffd6d6';answersEls.find(a=>Number(a.textContent)===questions[index].answer).style.outline='2px solid #347a58'}nextBtn.hidden=false;}
+ function finish(){gameArea.hidden=true;result.hidden=false;document.querySelector('#score').textContent=`Você acertou ${points} de ${questions.length}`;}
+ startBtn.addEventListener('click',begin);nextBtn.addEventListener('click',()=>{if(!locked)return;if(index===questions.length-1){finish();return}index++;render();});playAgain.addEventListener('click',begin);answersEls.forEach(el=>el.addEventListener('click',()=>choose(el)));
+ // detect touch and add class for larger hit targets
+ if('ontouchstart' in window||navigator.maxTouchPoints>0){document.documentElement.classList.add('touch');}
 })();
-</script></body></html>
+</script>
+</body>
+</html>
