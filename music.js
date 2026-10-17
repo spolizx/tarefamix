@@ -8,16 +8,28 @@
   const youtubePlayer = document.querySelector('#youtubeMusicPlayer');
   if (!button || !select || !volume || !output || !status) return;
 
+  const storage = {
+    getItem(k) { try { return localStorage.getItem(k); } catch (_) { return null; } },
+    setItem(k, v) { try { localStorage.setItem(k, v); } catch (_) {} },
+    removeItem(k) { try { localStorage.removeItem(k); } catch (_) {} }
+  };
+
   let context;
   let master;
   let activeNodes = [];
-  let playing = false;
+  let playing = false; // logical playing state (user requested play)
+  let pausedByVisibility = false;
 
+  // Load saved settings
+  try { const savedVol = storage.getItem('tm-music-volume'); if (savedVol !== null) volume.value = savedVol; } catch (_) {}
+  try { const savedType = storage.getItem('tm-music-type'); if (savedType !== null) select.value = savedType; } catch (_) {}
+
+  function safeStop(node) {
+    try { if (typeof node.stop === 'function') node.stop(); } catch (_) {}
+    try { if (typeof node.disconnect === 'function') node.disconnect(); } catch (_) {}
+  }
   function stopNodes() {
-    for (const node of activeNodes) {
-      try { node.stop?.(); } catch (_) {}
-      try { node.disconnect(); } catch (_) {}
-    }
+    for (const node of activeNodes) safeStop(node);
     activeNodes = [];
   }
 
@@ -57,23 +69,81 @@
     });
   }
 
-  function startSound() {
-    stopNodes();
-    if (select.value === 'tones') makeTones();
-    else makeNoise();
+  // Start new sound generation but keep transitions smooth (fade out old, fade in new)
+  async function startSound() {
+    // ensure context & master exist
+    if (!context) return;
+    if (!master) {
+      master = context.createGain();
+      master.gain.value = Number(volume.value) / 100;
+      master.connect(context.destination);
+    }
+
+    const now = context.currentTime;
+    try {
+      // fade out quickly
+      master.gain.cancelScheduledValues(now);
+      master.gain.setValueAtTime(master.gain.value, now);
+      master.gain.linearRampToValueAtTime(0, now + 0.08);
+    } catch (_) {}
+
+    // stop existing nodes after a short delay to allow fade
+    setTimeout(() => stopNodes(), 120);
+
+    // give a tiny time for old to fade
+    await new Promise(r => setTimeout(r, 140));
+
+    if (select.value === 'tones') makeTones(); else makeNoise();
+
+    // fade in to target
+    const target = Number(volume.value) / 100;
+    const after = context.currentTime;
+    master.gain.cancelScheduledValues(after);
+    master.gain.setValueAtTime(0, after);
+    master.gain.linearRampToValueAtTime(Math.max(0, Math.min(1, target)), after + 0.12);
   }
 
   function setVolume() {
     const percent = Number(volume.value);
     output.value = `${percent}%`;
     output.textContent = `${percent}%`;
-    if (master && context) master.gain.setTargetAtTime(percent / 100, context.currentTime, 0.06);
+    storage.setItem('tm-music-volume', String(percent));
+    if (master && context) {
+      const now = context.currentTime;
+      try {
+        master.gain.cancelScheduledValues(now);
+        master.gain.setValueAtTime(master.gain.value, now);
+        master.gain.linearRampToValueAtTime(Math.max(0, Math.min(1, percent / 100)), now + 0.08);
+      } catch (_) {}
+    }
   }
 
+  // Ducking helper: temporarily lower volume when an app notification appears
+  let duckTimeout = null;
+  function duckTemporary(amount = 0.25, duration = 4000) {
+    if (!master || !context) return;
+    const now = context.currentTime;
+    const current = master.gain.value ?? (Number(volume.value) / 100);
+    const target = Math.max(0, Math.min(current * amount, 1));
+    master.gain.cancelScheduledValues(now);
+    master.gain.setValueAtTime(current, now);
+    master.gain.linearRampToValueAtTime(target, now + 0.05);
+    if (duckTimeout) clearTimeout(duckTimeout);
+    duckTimeout = setTimeout(() => {
+      const then = context.currentTime;
+      master.gain.cancelScheduledValues(then);
+      master.gain.setValueAtTime(master.gain.value, then);
+      master.gain.linearRampToValueAtTime(Math.max(0, Math.min(1, Number(volume.value) / 100)), then + 0.12);
+      duckTimeout = null;
+    }, duration);
+  }
+
+  // Play / pause
   button.addEventListener('click', async () => {
     if (playing) {
       stopNodes();
       playing = false;
+      storage.setItem('tm-music-playing', 'false');
       button.textContent = '▶ Tocar som';
       button.setAttribute('aria-pressed', 'false');
       status.textContent = 'Som pausado.';
@@ -87,36 +157,86 @@
       if (!master) {
         master = context.createGain();
         master.connect(context.destination);
+        master.gain.value = Number(volume.value) / 100;
       }
       setVolume();
-      startSound();
+      await startSound();
       playing = true;
+      storage.setItem('tm-music-playing', 'true');
+      storage.setItem('tm-music-type', select.value);
       button.textContent = '⏸ Pausar som';
       button.setAttribute('aria-pressed', 'true');
       status.textContent = `${select.options[select.selectedIndex].text} tocando. O som só começa quando você clicar.`;
     } catch (error) {
-      status.textContent = error.message || 'Não foi possível iniciar o áudio.';
+      status.textContent = error?.message || 'Não foi possível iniciar o áudio.';
     }
   });
 
-  select.addEventListener('change', () => {
+  select.addEventListener('change', async () => {
+    storage.setItem('tm-music-type', select.value);
     if (playing) {
-      startSound();
+      await startSound();
       status.textContent = `${select.options[select.selectedIndex].text} tocando.`;
     }
   });
   volume.addEventListener('input', setVolume);
-  const searchForm = document.querySelector('#youtubeMusicSearchForm');
-  const searchInput = document.querySelector('#youtubeMusicSearch');
-  const searchButton = document.querySelector('#youtubeMusicSearchButton');
-  const searchStatus = document.querySelector('#youtubeMusicSearchStatus');
-  const searchResults = document.querySelector('#youtubeMusicResults');
+
+  // Keyboard shortcut: Space toggles play/pause when focus not on inputs
+  document.addEventListener('keydown', (e) => {
+    const tag = document.activeElement && document.activeElement.tagName;
+    if (e.code === 'Space' && tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
+      e.preventDefault(); button.click();
+    }
+  });
+
+  // Pause when page hidden to save CPU/battery; resume if user had music playing
+  document.addEventListener('visibilitychange', async () => {
+    if (document.hidden) {
+      if (playing) {
+        // stop nodes but remember we were playing
+        pausedByVisibility = true;
+        stopNodes();
+      }
+    } else {
+      if (pausedByVisibility) {
+        pausedByVisibility = false;
+        if (playing) {
+          try { if (context && context.state === 'suspended') await context.resume(); } catch (_) {}
+          await startSound();
+        }
+      }
+    }
+  });
+
+  // Duck when reminder toast shows (integrates with existing UI): observe class changes
+  const reminderToast = document.querySelector('#reminderToast');
+  if (reminderToast) {
+    const mo = new MutationObserver((records) => {
+      for (const r of records) {
+        if (r.attributeName === 'class') {
+          const has = reminderToast.classList.contains('show');
+          if (has) duckTemporary(0.25, 4000);
+        }
+      }
+    });
+    mo.observe(reminderToast, { attributes: true });
+  }
+
+  // Better YouTube handling: persist last chosen track id; save when user opens
   const youtubeChoice = document.querySelector('#youtubeMusicChoice');
+  try {
+    const saved = storage.getItem('tm-youtube-last');
+    if (saved && youtubeChoice) {
+      // try to select option with that value
+      const opt = [...youtubeChoice.options].find(o => o.value === saved);
+      if (opt) youtubeChoice.value = saved;
+    }
+  } catch (_) {}
 
   function playYoutubeVideo(videoId, title) {
     if (!youtubePlayer) return;
     if (location.protocol === 'file:') {
-      searchStatus.textContent = 'Abra o TarefaMix publicado para tocar músicas dentro do app junto com o cronômetro.';
+      status.textContent = 'Abra o TarefaMix publicado para tocar músicas dentro do app junto com o cronômetro.';
       return;
     }
     let frame = youtubePlayer.querySelector('iframe');
@@ -132,8 +252,16 @@
     frame.title = title;
     youtubePlayer.hidden = false;
     youtubeButton.textContent = 'Trocar vídeo';
-    searchStatus.textContent = `Player pronto: ${title}. Aperte reproduzir e depois inicie o cronômetro.`;
+    storage.setItem('tm-youtube-last', videoId);
+    status.textContent = `Player pronto: ${title}. Aperte reproduzir e depois inicie o cronômetro.`;
   }
+
+  // Wrap original search handling but keep behavior; persist last search selection when user chooses
+  const searchForm = document.querySelector('#youtubeMusicSearchForm');
+  const searchInput = document.querySelector('#youtubeMusicSearch');
+  const searchButton = document.querySelector('#youtubeMusicSearchButton');
+  const searchStatus = document.querySelector('#youtubeMusicSearchStatus');
+  const searchResults = document.querySelector('#youtubeMusicResults');
 
   searchForm?.addEventListener('submit', async event => {
     event.preventDefault();
@@ -186,5 +314,7 @@
     const track = youtubeChoice.options[youtubeChoice.selectedIndex];
     playYoutubeVideo(track.value, track.dataset.title);
   });
+
+  // Init UI with saved values
   setVolume();
 })();
