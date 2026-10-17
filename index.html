@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TarefaMix — Organizador escolar</title>
   <meta name="description" content="TarefaMix — organiza tarefas, timer Pomodoro, planilha rápida e assistente local. Tudo salvo no navegador, sem IA externa.">
-  <meta property="og:title" content="TarefaMix — Organizador escolar">
-  <meta property="og:description" content="Organize tarefas, tempo e anotações. Offline e gratuito.">
-  <meta property="og:type" content="website">
-  <meta name="theme-color" content="#347a58">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/ui-enhancements.css">
@@ -17,7 +13,7 @@
   <div class="app-shell" role="application" aria-label="TarefaMix Organizador">
     <header class="topbar">
       <div class="brand" role="banner">
-        <div class="brand-mark" aria-hidden="true">✳</div>
+        <img src="assets/logo.svg" alt="TarefaMix" class="brand-logo">
         <div>
           <div class="brand-name">TarefaMix</div>
           <div class="brand-subtitle">Organizador escolar</div>
@@ -25,6 +21,9 @@
       </div>
 
       <div class="top-actions">
+        <div class="search-wrap">
+          <input id="quickSearch" placeholder="Procurar tarefas ou anotações..." aria-label="Pesquisar" />
+        </div>
         <div class="mode-toggle" title="Alternar modo">
           <label for="modeSelect" class="visually-hidden">Modo</label>
           <select id="modeSelect" aria-label="Selecionar modo">
@@ -32,30 +31,43 @@
             <option value="worker">Trabalhando</option>
           </select>
         </div>
-        <button class="ghost-button" id="reloadBtn" type="button">Recarregar</button>
-        <button class="ghost-button" id="exportCsvBtn" type="button">Exportar CSV</button>
-        <button class="ghost-button" id="exportJsonBtn" type="button">Backup (JSON)</button>
-        <button class="primary-button" id="helpBtn" type="button">Ajuda</button>
+        <div class="top-buttons">
+          <button class="ghost-button" id="reloadBtn" type="button" title="Recarregar">⭮</button>
+          <button class="ghost-button" id="exportCsvBtn" type="button" title="Exportar tarefas">CSV</button>
+          <button class="ghost-button" id="exportJsonBtn" type="button" title="Backup JSON">Backup</button>
+          <button class="primary-button" id="helpBtn" type="button">Ajuda</button>
+        </div>
+        <div class="profile">
+          <div class="avatar">TM</div>
+        </div>
       </div>
     </header>
 
     <main class="layout">
       <section class="main-column">
-        <div class="hero card">
+        <div class="hero card decorated">
           <div class="hero-copy">
             <span class="eyebrow">Seu estudo em ordem</span>
             <h1>Organize tarefas, foco e rotina com clareza.</h1>
-            <p>Sem IA externa. Sem custo. Tudo salvo no navegador e pronto para usar.</p>
+            <p class="muted">Sem IA externa. Tudo salvo no navegador — rápido, privado e sempre disponível.</p>
+
+            <div class="hero-stats">
+              <div class="stat">
+                <div class="stat-value" id="todayCount">0</div>
+                <div class="stat-label">tarefas pendentes</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">25</div>
+                <div class="stat-label">min foco</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">Backup</div>
+                <div class="stat-label">salvo local</div>
+              </div>
+            </div>
           </div>
           <div class="hero-visual">
-            <div class="mini-card">
-              <span>Hoje</span>
-              <strong id="todayCount">0 tarefas</strong>
-            </div>
-            <div class="mini-card accent">
-              <span>Foco</span>
-              <strong>25 min</strong>
-            </div>
+            <img src="assets/hero.svg" alt="Visual" />
           </div>
         </div>
 
@@ -74,8 +86,9 @@
         <section class="panel card">
           <div class="panel-head">
             <h2>Minhas tarefas</h2>
-            <div>
-              <button class="small-btn" id="exportTasksCsv">Exportar tarefas CSV</button>
+            <div class="panel-actions">
+              <button class="small-btn" id="exportTasksCsv">Exportar CSV</button>
+              <button class="small-btn" id="clearCompleted">Limpar concluídas</button>
             </div>
           </div>
           <div id="taskList" class="task-list" aria-live="polite"></div>
@@ -102,9 +115,7 @@
           </div>
 
           <div id="assistantChat" class="assistant-chat" aria-live="polite">
-            <div class="message bot">
-              Oi! Posso ajudar com frações, equações, fotossíntese e dicas de estudo.
-            </div>
+            <div class="message bot">Oi! Posso ajudar com frações, equações, fotossíntese e dicas de estudo.</div>
           </div>
 
           <form id="assistantForm" class="assistant-form">
@@ -143,6 +154,14 @@
 
       </aside>
     </main>
+
+    <footer class="footer card">
+      <div>Made with ❤️ • TarefaMix — Offline first</div>
+      <div class="footer-links">
+        <a href="#" id="showAbout">Sobre</a>
+        <a href="#" id="reportBug">Reportar bug</a>
+      </div>
+    </footer>
   </div>
 
   <script src="scripts/ui-enhancements.js"></script>
