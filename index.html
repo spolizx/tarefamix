@@ -1,15 +1,62 @@
-</textarea>
-          <div style="margin-top:8px;display:flex;gap:8px"><button class="secondary-btn" onclick="(function(){const a=document.querySelector('.textarea');navigator.clipboard.writeText(a.value||'');alert('Copiado para a área de transferência');})()">Copiar</button><button class="secondary-btn" onclick="(function(){localStorage.removeItem('tm_notes_v1');document.querySelector('.textarea').value='';alert('Anotações limpas');})()">Limpar</button></div>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TarefaMix — Organizador escolar</title>
+<link rel="stylesheet" href="styles/ui-enhancements.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <img src="assets/logo.svg" alt="TarefaMix logo">
+        <div>
+          <div class="title">TarefaMix</div>
+          <div class="subtitle">Organizador escolar — Modo local</div>
         </div>
-      </aside>
-    </div>
+      </div>
+      <div class="controls">
+        <button class="secondary-btn" onclick="location.reload()">Recarregar</button>
+        <button class="primary-btn" id="openHelp">Ajuda rápida</button>
+      </div>
+    </header>
 
-    <div class="footer">TarefaMix — privado, local e sem IA externa · Feito para estudos</div>
-  </div>
+    <div class="grid">
+      <section class="card">
+        <div class="hero">
+          <img src="assets/hero.svg" alt="Hero">
+          <div style="flex:1">
+            <div class="section-title"><h2>Organize suas tarefas</h2><div></div></div>
+            <form id="newTaskForm" style="display:flex;gap:8px;margin-bottom:12px">
+              <input class="input" name="title" placeholder="Nova tarefa (ex.: estudar matemática)" required>
+              <input class="input" name="due" type="date">
+              <button class="primary-btn" type="submit">Adicionar</button>
+            </form>
+            <div class="tasks-list card" id="tasksContainer" style="padding:12px"></div>
+          </div>
+        </div>
 
-<script src="scripts/ui-enhancements.js"></script>
-<script>
-// hydrate notes
-try{document.querySelector('.textarea').value = localStorage.getItem('tm_notes_v1') || ''}catch(_){}</script>
-</body>
-</html>
+        <div style="margin-top:16px" class="section-title"><h2>Timer Pomodoro</h2><div></div></div>
+        <div class="card" style="display:flex;align-items:center;justify-content:space-between">
+          <div class="timer"><div class="timer-display" id="timerDisplay">25:00</div></div>
+          <div style="display:flex;gap:8px"><button class="primary-btn" id="startTimer">Iniciar</button><button class="secondary-btn" id="resetTimer">Resetar</button></div>
+        </div>
+
+      </section>
+
+      <aside>
+        <div class="card">
+          <div class="section-title"><h2>Assistente de estudos</h2><div></div></div>
+          <div class="study-chat" id="studyChat">
+            <div class="chat-message assistant">Oi! Eu posso explicar frações, equações simples e fotossíntese. Pergunte algo.</div>
+          </div>
+          <form id="studyForm" class="chat-form">
+            <input id="studyInput" class="input" placeholder="Escreva uma pergunta de estudo..." required>
+            <button class="primary-btn">Perguntar</button>
+          </form>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div class="section-title"><h2>Anotações rápidas</h2><div></div></div>
+          <textarea class="textarea" style="height:120px;width:100%;" placeholder="Suas anotações..." onchange="localStorage.setItem('tm_notes_v1', this.value)">

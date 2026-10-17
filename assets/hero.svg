@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 260">
+  <defs>
+    <linearGradient id="h" x1="0" x2="1">
+      <stop offset="0" stop-color="#eef8f1"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="260" fill="url(#h)"/>
+  <g transform="translate(40,40)">
+    <rect rx="18" width="220" height="180" fill="#347a58" opacity="0.06"></rect>
+    <g transform="translate(260,10)">
+      <text x="0" y="36" font-size="34" fill="#1f3b2f" font-family="Arial, Helvetica, sans-serif">Estude melhor com o TarefaMix</text>
+      <text x="0" y="76" font-size="18" fill="#3c5f4f">Organize tarefas, acompanhe o tempo, tire dúvidas de estudo — tudo offline.</text>
+    </g>
+  </g>
+</svg>
