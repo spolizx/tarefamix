@@ -106,18 +106,23 @@
     }
   });
   volume.addEventListener('input', setVolume);
+  const youtubeChoice = document.querySelector('#youtubeMusicChoice');
   youtubeButton?.addEventListener('click', () => {
-    if (!youtubePlayer || youtubePlayer.childElementCount) return;
-    const frame = document.createElement('iframe');
-    frame.src = 'https://www.youtube-nocookie.com/embed/jKldRsA-wOE?rel=0&modestbranding=1';
-    frame.title = 'Ruído branco para TDAH (concentração e foco) — TDAH Descomplicado';
-    frame.loading = 'lazy';
-    frame.referrerPolicy = 'strict-origin-when-cross-origin';
-    frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-    frame.allowFullscreen = true;
-    youtubePlayer.append(frame);
+    if (!youtubePlayer || !youtubeChoice) return;
+    const track = youtubeChoice.options[youtubeChoice.selectedIndex];
+    let frame = youtubePlayer.querySelector('iframe');
+    if (!frame) {
+      frame = document.createElement('iframe');
+      frame.loading = 'lazy';
+      frame.referrerPolicy = 'strict-origin-when-cross-origin';
+      frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      frame.allowFullscreen = true;
+      youtubePlayer.append(frame);
+    }
+    frame.src = `https://www.youtube-nocookie.com/embed/${track.value}?rel=0&modestbranding=1`;
+    frame.title = track.dataset.title;
     youtubePlayer.hidden = false;
-    youtubeButton.hidden = true;
+    youtubeButton.textContent = 'Trocar vídeo';
   });
   setVolume();
 })();
